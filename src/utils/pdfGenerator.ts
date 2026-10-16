@@ -42,20 +42,20 @@ export function generateResumePDF(): void {
   const titleX = margin + 24;
   doc.setTextColor(255, 255, 255);
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(19);
-  doc.text('FELIX', titleX, 14.5);
+  doc.setFontSize(17);
+  doc.text('ADHIMAS PRAKOSO (FELIX)', titleX, 14);
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8.5);
+  doc.setFontSize(8);
   doc.setTextColor(196, 181, 253);
-  doc.text('Fullstack Software Engineer · UI/UX Designer · 3D Artist (Blender) · 2D Illustrator', titleX, 19.5);
+  doc.text('Fullstack Software Engineer · Ketua Divisi Litbang HMTI · UI/UX Designer · 3D Artist', titleX, 19);
 
   // Quick Contact Pills Bar
   const contactPills = [
     { text: '0xFE1C@proton.me', icon: '@' },
     { text: '0xfe1c.github.io', icon: 'W' },
     { text: 'github.com/0xFE1C', icon: 'G' },
-    { text: 'Jakarta, ID (July 2005)', icon: 'L' },
+    { text: 'Jakarta, ID (NIM: 17230448)', icon: 'L' },
   ];
 
   let pillX = titleX;
@@ -119,18 +119,16 @@ export function generateResumePDF(): void {
   doc.text('EXECUTIVE DOSSIER', margin + 4.5, currentY + 4.2);
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(6.9);
+  doc.setFontSize(6.8);
   doc.setTextColor(51, 65, 85);
   const summary =
-    'Multi-disciplinary Software Engineer and Digital Artist (born July 2005, Jakarta) with 3+ years of freelance experience architecting robust web, mobile, desktop, and fullstack applications with third-party payment gateways and real-time APIs. Blends computer science fundamentals with foundational electrical engineering (TITL) and spatial 3D/2D visual artistry (Blender procedural rendering & digital illustrations). Currently pursuing S1 Information Technology at Universitas Bina Sarana Informatika.';
+    'Adhimas Prakoso / Felix (0xFE1C, born July 2005, Jakarta) is a Multi-Disciplinary Software Engineer, Head of R&D (Ketua Divisi Litbang) at HMTI DPC Pemuda UBSI, and Digital Artist. Combines 3+ years of freelance experience delivering robust web, mobile, and desktop applications with low-level electrical engineering fundamentals (SMK TITL), Cisco-certified Python engineering, and spatial 3D computer graphics (Blender). Currently pursuing S1 Information Technology at Universitas Bina Sarana Informatika.';
   const splitSummary = doc.splitTextToSize(summary, contentWidth - 8);
   doc.text(splitSummary, margin + 4.5, currentY + 7.8);
 
   currentY += summaryBoxH + 4;
 
   // 3. TWO-COLUMN GRID ARCHITECTURE
-  // Left Column (Experience, Key Architectures, Education): 114mm
-  // Right Column (Skills, Certifications, Dossier): 71mm
   const leftColX = margin;
   const leftColW = 114;
   const rightColX = margin + leftColW + 5;
@@ -140,12 +138,12 @@ export function generateResumePDF(): void {
   let rightY = currentY;
 
   // ==========================================
-  // LEFT COLUMN: WORK EXPERIENCE
+  // LEFT COLUMN: WORK & LEADERSHIP EXPERIENCE
   // ==========================================
-  leftY = drawSectionHeader('Professional Experience', leftColX, leftColW, leftY);
+  leftY = drawSectionHeader('Professional & Leadership Experience', leftColX, leftColW, leftY);
 
   // Role 1: Freelance Software Engineer
-  const r1H = 41;
+  const r1H = 34;
   doc.setFillColor(255, 255, 255);
   doc.setDrawColor(226, 232, 240);
   doc.setLineWidth(0.3);
@@ -155,7 +153,7 @@ export function generateResumePDF(): void {
   doc.roundedRect(leftColX, leftY, 1.2, r1H, 0.5, 0.5, 'F');
 
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(8.2);
+  doc.setFontSize(8);
   doc.setTextColor(15, 23, 42);
   doc.text('Independent Software Engineer (Freelance)', leftColX + 4, leftY + 4.2);
 
@@ -167,34 +165,33 @@ export function generateResumePDF(): void {
   doc.text('2021 – Present (3+ Yrs)', leftColX + leftColW - 20, leftY + 4.8, { align: 'center' });
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(6.8);
+  doc.setFontSize(6.6);
   doc.setTextColor(100, 116, 139);
-  doc.text('Self-Employed · Remote & On-Demand Client Contracts', leftColX + 4, leftY + 8);
+  doc.text('Self-Employed · Remote Fullstack Engineering & APIs', leftColX + 4, leftY + 7.8);
 
   const freelancePoints = [
-    'Engineered end-to-end bespoke applications across Web, Mobile (cross-platform), and Desktop ecosystems tailored to custom business specifications.',
+    'Engineered bespoke applications across Web, Mobile (cross-platform), and Desktop ecosystems tailored to custom specifications.',
     'Architected secure payment gateway transaction workflows with signature verification, automated webhooks, and resilient order handling.',
     'Built responsive, high-performance user interfaces and design systems in Figma and Tailwind CSS with optimal core web vitals.',
-    'Maintained continuous software integration, database schemas, and zero-downtime client deployments.',
   ];
 
-  let fY = leftY + 12.2;
+  let fY = leftY + 11.8;
   freelancePoints.forEach((pt) => {
     doc.setFillColor(124, 58, 237);
     doc.circle(leftColX + 5, fY - 0.9, 0.65, 'F');
 
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(6.5);
+    doc.setFontSize(6.4);
     doc.setTextColor(51, 65, 85);
     const split = doc.splitTextToSize(pt, leftColW - 10);
     doc.text(split, leftColX + 7.5, fY);
-    fY += split.length * 2.8 + 1;
+    fY += split.length * 2.8 + 0.8;
   });
 
-  leftY += r1H + 3.5;
+  leftY += r1H + 3;
 
-  // Role 2: PT INDOPINTAN ADI PERKASA
-  const r2H = 34;
+  // Role 2: HMTI DPC Pemuda - Ketua Divisi Litbang
+  const r2H = 29;
   doc.setFillColor(255, 255, 255);
   doc.setDrawColor(226, 232, 240);
   doc.setLineWidth(0.3);
@@ -204,85 +201,132 @@ export function generateResumePDF(): void {
   doc.roundedRect(leftColX, leftY, 1.2, r2H, 0.5, 0.5, 'F');
 
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(8.2);
+  doc.setFontSize(8);
   doc.setTextColor(15, 23, 42);
-  doc.text('PT INDOPINTAN ADI PERKASA', leftColX + 4, leftY + 4.2);
+  doc.text('Ketua Divisi Litbang (Research & Development)', leftColX + 4, leftY + 4.2);
 
   doc.setFillColor(207, 250, 254);
-  doc.roundedRect(leftColX + leftColW - 28, leftY + 1.8, 25, 4.2, 1.2, 1.2, 'F');
+  doc.roundedRect(leftColX + leftColW - 35, leftY + 1.8, 32, 4.2, 1.2, 1.2, 'F');
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(6.2);
   doc.setTextColor(14, 116, 144);
+  doc.text('2025 – 2026 · HMTI UBSI', leftColX + leftColW - 19, leftY + 4.8, { align: 'center' });
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(6.6);
+  doc.setTextColor(71, 85, 105);
+  doc.text('HMTI DPC Pemuda · Universitas Bina Sarana Informatika', leftColX + 4, leftY + 7.8);
+
+  const hmtiPoints = [
+    'Directs student technology research initiatives, emerging development tooling exploration, and academic tech roadmaps.',
+    'Orchestrates collaborative coding workshops, technical development clinics, and digital talent acceleration sessions.',
+    'Accredited through official Organization Certificate No: 05/SRT/17230448/DPC PEMUDA/HMTI/XI/2025.',
+  ];
+
+  let hY = leftY + 11.8;
+  hmtiPoints.forEach((pt) => {
+    doc.setFillColor(6, 182, 212);
+    doc.circle(leftColX + 5, hY - 0.9, 0.65, 'F');
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(6.4);
+    doc.setTextColor(51, 65, 85);
+    const split = doc.splitTextToSize(pt, leftColW - 10);
+    doc.text(split, leftColX + 7.5, hY);
+    hY += split.length * 2.8 + 0.8;
+  });
+
+  leftY += r2H + 3;
+
+  // Role 3: PT INDOPINTAN ADI PERKASA
+  const r3H = 26;
+  doc.setFillColor(255, 255, 255);
+  doc.setDrawColor(226, 232, 240);
+  doc.setLineWidth(0.3);
+  doc.roundedRect(leftColX, leftY, leftColW, r3H, 1.8, 1.8, 'FD');
+
+  doc.setFillColor(245, 158, 11);
+  doc.roundedRect(leftColX, leftY, 1.2, r3H, 0.5, 0.5, 'F');
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8);
+  doc.setTextColor(15, 23, 42);
+  doc.text('PT INDOPINTAN ADI PERKASA', leftColX + 4, leftY + 4.2);
+
+  doc.setFillColor(254, 243, 199);
+  doc.roundedRect(leftColX + leftColW - 28, leftY + 1.8, 25, 4.2, 1.2, 1.2, 'F');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(6.2);
+  doc.setTextColor(180, 83, 9);
   doc.text('Vocational PKL', leftColX + leftColW - 15.5, leftY + 4.8, { align: 'center' });
 
   doc.setFont('helvetica', 'italic');
-  doc.setFontSize(6.8);
+  doc.setFontSize(6.6);
   doc.setTextColor(71, 85, 105);
-  doc.text('Administrative Assistant & Operations Support · Jakarta', leftColX + 4, leftY + 8);
+  doc.text('Administrative Assistant & Operations Support · Jakarta', leftColX + 4, leftY + 7.8);
 
   const internPoints = [
-    'Calculated monthly employee payroll data through precise mathematical aggregation of workday attendance logs and overtime hours.',
-    'Conducted warehouse physical inventory audits, cataloging incoming/outgoing stock items to maintain high data accuracy.',
-    'Provided rapid customer service and order dispute resolution on the Shopee marketplace platform.',
+    'Calculated monthly employee payroll data through precise mathematical aggregation of attendance and overtime logs.',
+    'Conducted physical warehouse inventory audits and provided rapid e-commerce customer support on Shopee.',
   ];
 
-  let iY = leftY + 12.2;
+  let iY = leftY + 11.8;
   internPoints.forEach((pt) => {
-    doc.setFillColor(6, 182, 212);
+    doc.setFillColor(245, 158, 11);
     doc.circle(leftColX + 5, iY - 0.9, 0.65, 'F');
 
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(6.5);
+    doc.setFontSize(6.4);
     doc.setTextColor(51, 65, 85);
     const split = doc.splitTextToSize(pt, leftColW - 10);
     doc.text(split, leftColX + 7.5, iY);
-    iY += split.length * 2.8 + 1;
+    iY += split.length * 2.8 + 0.8;
   });
 
-  leftY += r2H + 4;
+  leftY += r3H + 3.5;
 
   // ==========================================
-  // LEFT COLUMN: KEY ENGINEERING ARCHITECTURES
+  // LEFT COLUMN: FEATURED ARCHITECTURES
   // ==========================================
   leftY = drawSectionHeader('Featured Engineering & Open Architectures', leftColX, leftColW, leftY);
 
   const archProjects = [
     {
-      title: 'Cosmic Portfolio Engine (0xfe1c.github.io)',
+      title: 'Deep Space Orbit Portfolio (0xfe1c.github.io)',
       stack: 'React · Vite · TypeScript · Web Audio · Canvas 2D/3D',
-      desc: 'Engineered an interactive astrophysical simulation featuring a relativistic Kerr-metric black hole (Gargantua doppler beaming & accretion disc), synthetic audio drone osc, and 8-language i18n.',
+      desc: 'Interactive astrophysical engine simulating a relativistic Kerr black hole (Gargantua doppler beaming & accretion disc), synthetic audio drone osc, and 8-language i18n.',
     },
     {
       title: 'Realtime Webhook & Payment Dispatcher',
-      stack: 'Node.js · WebSockets · Cryptographic HMAC · Redis/DB',
+      stack: 'Node.js · WebSockets · Cryptographic HMAC · DB Sync',
       desc: 'Architected automated payment verification dispatchers handling real-time instant notifications, cryptographic signature validations, and idempotent order state synchronization.',
     },
   ];
 
   archProjects.forEach((proj) => {
-    const projH = 21.5;
+    const projH = 19.5;
     doc.setFillColor(255, 255, 255);
     doc.setDrawColor(226, 232, 240);
     doc.setLineWidth(0.3);
     doc.roundedRect(leftColX, leftY, leftColW, projH, 1.5, 1.5, 'FD');
 
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(7.6);
+    doc.setFontSize(7.4);
     doc.setTextColor(15, 23, 42);
-    doc.text(proj.title, leftColX + 3.5, leftY + 4.2);
+    doc.text(proj.title, leftColX + 3.5, leftY + 4);
 
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(6.1);
+    doc.setFontSize(6);
     doc.setTextColor(124, 58, 237);
-    doc.text(proj.stack, leftColX + 3.5, leftY + 8);
+    doc.text(proj.stack, leftColX + 3.5, leftY + 7.5);
 
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(6.4);
+    doc.setFontSize(6.2);
     doc.setTextColor(71, 85, 105);
     const split = doc.splitTextToSize(proj.desc, leftColW - 7);
-    doc.text(split, leftColX + 3.5, leftY + 11.8);
+    doc.text(split, leftColX + 3.5, leftY + 11.2);
 
-    leftY += projH + 3;
+    leftY += projH + 2.5;
   });
 
   leftY += 1;
@@ -320,7 +364,7 @@ export function generateResumePDF(): void {
   ];
 
   educationList.forEach((edu) => {
-    const eduH = 15.5;
+    const eduH = 14.5;
     doc.setFillColor(255, 255, 255);
     doc.setDrawColor(226, 232, 240);
     doc.setLineWidth(0.3);
@@ -328,32 +372,32 @@ export function generateResumePDF(): void {
 
     // Title
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(7.5);
+    doc.setFontSize(7.4);
     doc.setTextColor(15, 23, 42);
-    doc.text(edu.school, leftColX + 3.5, leftY + 4);
+    doc.text(edu.school, leftColX + 3.5, leftY + 3.8);
 
     // Degree
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(6.7);
+    doc.setFontSize(6.5);
     doc.setTextColor(124, 58, 237);
-    doc.text(edu.degree, leftColX + 3.5, leftY + 7.8);
+    doc.text(edu.degree, leftColX + 3.5, leftY + 7.4);
 
     // Badge
     const bW = doc.getTextWidth(edu.badge) + 4;
     doc.setFillColor(edu.badgeColor[0], edu.badgeColor[1], edu.badgeColor[2]);
-    doc.roundedRect(leftColX + leftColW - bW - 2.5, leftY + 1.8, bW, 4, 1, 1, 'F');
+    doc.roundedRect(leftColX + leftColW - bW - 2.5, leftY + 1.8, bW, 3.8, 1, 1, 'F');
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(5.8);
+    doc.setFontSize(5.6);
     doc.setTextColor(edu.textColor[0], edu.textColor[1], edu.textColor[2]);
-    doc.text(edu.badge, leftColX + leftColW - bW / 2 - 2.5, leftY + 4.6, { align: 'center' });
+    doc.text(edu.badge, leftColX + leftColW - bW / 2 - 2.5, leftY + 4.5, { align: 'center' });
 
     // Description
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(6.2);
+    doc.setFontSize(6);
     doc.setTextColor(71, 85, 105);
-    doc.text(edu.desc, leftColX + 3.5, leftY + 11.8);
+    doc.text(edu.desc, leftColX + 3.5, leftY + 11.2);
 
-    leftY += eduH + 2.5;
+    leftY += eduH + 2.2;
   });
 
   // ==========================================
@@ -386,7 +430,7 @@ export function generateResumePDF(): void {
 
   skillGroups.forEach((group) => {
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(7);
+    doc.setFontSize(6.8);
     doc.setTextColor(group.color[0], group.color[1], group.color[2]);
     doc.text(group.category.toUpperCase(), rightColX, rightY);
     rightY += 3;
@@ -397,54 +441,54 @@ export function generateResumePDF(): void {
 
     group.items.forEach((item) => {
       doc.setFont('helvetica', 'normal');
-      doc.setFontSize(6.1);
+      doc.setFontSize(6);
       const strW = doc.getTextWidth(item);
       const bWidth = strW + 4;
 
       if (pillCurX + bWidth > rightColX + rightColW) {
         pillCurX = rightColX;
-        pillCurY += 4.5;
+        pillCurY += 4.4;
       }
 
       doc.setFillColor(248, 250, 252);
       doc.setDrawColor(226, 232, 240);
       doc.setLineWidth(0.25);
-      doc.roundedRect(pillCurX, pillCurY, bWidth, 3.8, 1, 1, 'FD');
+      doc.roundedRect(pillCurX, pillCurY, bWidth, 3.6, 1, 1, 'FD');
 
       doc.setTextColor(51, 65, 85);
-      doc.text(item, pillCurX + 2, pillCurY + 2.7);
+      doc.text(item, pillCurX + 2, pillCurY + 2.6);
 
-      pillCurX += bWidth + 1.6;
+      pillCurX += bWidth + 1.5;
     });
 
-    rightY = pillCurY + 6;
+    rightY = pillCurY + 5.6;
   });
 
   // ==========================================
-  // RIGHT COLUMN: VERIFIED CREDENTIALS
+  // RIGHT COLUMN: VERIFIED CREDENTIALS (AUTHENTIC CERTIFICATES)
   // ==========================================
-  rightY = drawSectionHeader('Verified Credentials', rightColX, rightColW, rightY);
+  rightY = drawSectionHeader('Verified Credentials & Certificates', rightColX, rightColW, rightY);
 
   const certList = [
     {
-      title: 'Fullstack Web Application Architecture',
-      id: 'FS-0xFE1C-9921',
-      issuer: 'Modern Web & API Engineering',
+      title: 'Ketua Divisi Litbang HMTI (UBSI)',
+      id: '05/SRT/17230448/HMTI/2025',
+      issuer: 'HMTI DPC Pemuda · Universitas BSI',
+    },
+    {
+      title: 'PCAP: Programming Essentials in Python',
+      id: 'CISCO-PCAP-2024-UBSI',
+      issuer: 'Cisco NetAcad & OpenEDG Python Institute',
+    },
+    {
+      title: 'Seminar Transformasi & Talenta Digital',
+      id: 'UBSI-FTI-TALENTA-2023',
+      issuer: 'Fakultas Teknik & Informatika UBSI',
     },
     {
       title: 'TITL Electrical Power Installation',
       id: 'TITL-DP1-2023-8812',
-      issuer: 'SMK DP1 & BNSP Standard',
-    },
-    {
-      title: 'Blender 3D Graphics & Computer Animation',
-      id: 'B3D-ANIM-7741',
-      issuer: 'Spatial Computer Graphics',
-    },
-    {
-      title: 'Fintech Payment Gateway Integrations',
-      id: 'PAY-ARCH-5542',
-      issuer: 'Secure Transaction Systems',
+      issuer: 'SMK Dinamika Pembangunan 1 (BNSP)',
     },
   ];
 
@@ -456,21 +500,21 @@ export function generateResumePDF(): void {
 
     // Title
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(6.7);
+    doc.setFontSize(6.6);
     doc.setTextColor(15, 23, 42);
-    doc.text(c.title, rightColX + 3, rightY + 3.7);
+    doc.text(c.title, rightColX + 3, rightY + 3.6);
 
     // Subtitle & ID
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(5.8);
+    doc.setFontSize(5.7);
     doc.setTextColor(100, 116, 139);
-    doc.text(c.issuer, rightColX + 3, rightY + 7.1);
+    doc.text(c.issuer, rightColX + 3, rightY + 7);
 
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(124, 58, 237);
-    doc.text(c.id, rightColX + rightColW - 3, rightY + 7.1, { align: 'right' });
+    doc.text(c.id, rightColX + rightColW - 3, rightY + 7, { align: 'right' });
 
-    rightY += 13;
+    rightY += 12.8;
   });
 
   // ==========================================
@@ -481,7 +525,7 @@ export function generateResumePDF(): void {
   doc.setFillColor(255, 255, 255);
   doc.setDrawColor(226, 232, 240);
   doc.setLineWidth(0.25);
-  doc.roundedRect(rightColX, rightY, rightColW, 25, 1.2, 1.2, 'FD');
+  doc.roundedRect(rightColX, rightY, rightColW, 23, 1.2, 1.2, 'FD');
 
   const methods = [
     { title: 'Fullstack Agility:', desc: 'Rapid zero-to-one prototyping with scalable architecture.' },
@@ -489,23 +533,23 @@ export function generateResumePDF(): void {
     { title: 'Spatial Artistry:', desc: 'Blender 3D geometry & shaders elevate digital web interfaces.' },
   ];
 
-  let mY = rightY + 3.8;
+  let mY = rightY + 3.5;
   methods.forEach((m) => {
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(6.3);
+    doc.setFontSize(6.2);
     doc.setTextColor(124, 58, 237);
     doc.text(m.title, rightColX + 3, mY);
 
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(6.1);
+    doc.setFontSize(5.9);
     doc.setTextColor(71, 85, 105);
     const s = doc.splitTextToSize(m.desc, rightColW - 6);
-    doc.text(s, rightColX + 3, mY + 3.3);
+    doc.text(s, rightColX + 3, mY + 3);
 
-    mY += 7.2;
+    mY += 6.5;
   });
 
-  rightY += 27.5;
+  rightY += 25;
 
   // ==========================================
   // RIGHT COLUMN: PERSONAL DOSSIER
@@ -515,27 +559,28 @@ export function generateResumePDF(): void {
   doc.setFillColor(248, 250, 252);
   doc.setDrawColor(226, 232, 240);
   doc.setLineWidth(0.25);
-  doc.roundedRect(rightColX, rightY, rightColW, 16, 1.5, 1.5, 'FD');
+  doc.roundedRect(rightColX, rightY, rightColW, 19, 1.5, 1.5, 'FD');
 
   const dossierLines = [
+    { label: 'Full Name:', val: 'Adhimas Prakoso (Felix)' },
     { label: 'Origin:', val: 'Born July 2005 · Jakarta, ID' },
+    { label: 'Organization:', val: 'Ketua Divisi Litbang HMTI (25/26)' },
     { label: 'Languages:', val: 'Indonesian (Native), English (Proficient)' },
-    { label: 'Availability:', val: 'Open for High-Impact Projects & Contracts' },
   ];
 
-  let dY = rightY + 4;
+  let dY = rightY + 3.8;
   dossierLines.forEach((d) => {
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(6.3);
+    doc.setFontSize(6.1);
     doc.setTextColor(109, 40, 217);
     doc.text(d.label, rightColX + 3, dY);
 
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(6.2);
+    doc.setFontSize(6);
     doc.setTextColor(51, 65, 85);
     doc.text(d.val, rightColX + 17, dY);
 
-    dY += 4.2;
+    dY += 3.8;
   });
 
   // 4. FOOTER VERIFICATION BAR (Exact bottom alignment)
@@ -558,5 +603,5 @@ export function generateResumePDF(): void {
   doc.text('https://0xfe1c.github.io', pageWidth - margin, footerY + 1.2, { align: 'right' });
 
   // Save PDF file
-  doc.save('Felix_0xFE1C_Portfolio_Resume.pdf');
+  doc.save('Adhimas_Prakoso_0xFE1C_Portfolio_Resume.pdf');
 }

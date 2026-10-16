@@ -52,8 +52,12 @@ export interface CertificationItem {
   date: string;
   credentialId: string;
   verificationUrl?: string;
+  pdfUrl?: string;
+  previewImages?: string[];
+  recipientName?: string;
+  downloadName?: string;
   skills: string[];
-  category: 'dev' | 'electrical' | '3d' | 'cloud';
+  category: 'dev' | 'electrical' | '3d' | 'cloud' | 'organization';
   description: string;
 }
 

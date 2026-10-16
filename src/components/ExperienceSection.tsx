@@ -1,5 +1,5 @@
 import React from 'react';
-import { Briefcase, Code2, CheckCircle2, MapPin, Calendar, Layers } from 'lucide-react';
+import { Briefcase, Code2, CheckCircle2, MapPin, Calendar, Layers, Users } from 'lucide-react';
 import { type Language } from '../types.ts';
 import { translations } from '../utils/translations.ts';
 import { experienceData } from '../data/portfolioData.ts';
@@ -38,7 +38,13 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ currentLan
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-800">
                 <div className="flex items-start space-x-4">
                   <div className="p-3.5 rounded-xl bg-slate-900 border border-purple-500/30 text-purple-400 shadow-md shadow-purple-900/30">
-                    {exp.id === 'freelance-dev' ? <Code2 className="w-6 h-6 text-cyan-400" /> : <Briefcase className="w-6 h-6 text-amber-400" />}
+                    {exp.id === 'freelance-dev' ? (
+                      <Code2 className="w-6 h-6 text-cyan-400" />
+                    ) : exp.id === 'hmti-litbang' ? (
+                      <Users className="w-6 h-6 text-purple-300" />
+                    ) : (
+                      <Briefcase className="w-6 h-6 text-amber-400" />
+                    )}
                   </div>
                   <div>
                     <div className="flex flex-wrap items-center gap-2">

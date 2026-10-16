@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, GraduationCap, Zap, School, MapPin, Calendar, Code, Sparkles, Box, Brush } from 'lucide-react';
+import { User, GraduationCap, Zap, School, MapPin, Calendar, Code, Sparkles, Box, Brush, Award } from 'lucide-react';
 import { type Language } from '../types.ts';
 import { translations } from '../utils/translations.ts';
 import { educationData } from '../data/portfolioData.ts';
@@ -123,6 +123,16 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ currentLang }) => {
                 <div>
                   <div className="text-[10px] font-mono text-slate-400">CIRCUIT TO CODE</div>
                   <div className="text-xs font-mono font-semibold text-slate-200">TITL Electrical &rarr; S1 Information Tech</div>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-xl bg-slate-950/70 border border-purple-500/30 flex items-center space-x-3.5">
+                <div className="p-2 rounded-lg bg-purple-900/40 text-purple-400">
+                  <Award className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[10px] font-mono text-purple-300">ORGANIZATION LEADERSHIP</div>
+                  <div className="text-xs font-mono font-semibold text-slate-200">Ketua Divisi Litbang · HMTI DPC Pemuda (2025/2026)</div>
                 </div>
               </div>
             </div>
