@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { Star, GitFork, RefreshCw, Search, ExternalLink, Code2, Clock } from 'lucide-react';
+import { Star, GitFork, RefreshCw, Search, ExternalLink, Code2, Clock, AlertCircle } from 'lucide-react';
 import { type GithubRepo, type Language } from '../types.ts';
 import { translations } from '../utils/translations.ts';
-import { fallbackRepos } from '../data/portfolioData.ts';
 import { spaceAudio } from '../utils/audio.ts';
 import { GithubIcon } from './GithubIcon.tsx';
 
@@ -27,20 +26,30 @@ const languageColors: Record<string, string> = {
 };
 
 export const GithubReposSection: React.FC<GithubReposSectionProps> = ({ currentLang }) => {
+  // Clear any legacy mock cache from previous sessions
+  useEffect(() => {
+    try {
+      localStorage.removeItem('0xfe1c_cached_real_repos');
+    } catch {
+      // Ignore
+    }
+  }, []);
+
   const [repos, setRepos] = useState<GithubRepo[]>(() => {
     try {
-      const cached = localStorage.getItem('0xfe1c_cached_real_repos');
+      const cached = localStorage.getItem('0xfe1c_live_github_repos_v2');
       if (cached) {
         const parsed = JSON.parse(cached);
         if (Array.isArray(parsed) && parsed.length > 0) return parsed;
       }
     } catch {
-      // Fallback
+      // Ignore
     }
-    return fallbackRepos;
+    return [];
   });
 
   const [loading, setLoading] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedLanguage, setSelectedLanguage] = useState<string>('all');
   const [lastSynced, setLastSynced] = useState<string | null>(null);
@@ -49,8 +58,11 @@ export const GithubReposSection: React.FC<GithubReposSectionProps> = ({ currentL
   const t = translations[currentLang];
 
   const fetchGithubRepos = useCallback(async () => {
+    setLoading(true);
+    setErrorMessage(null);
+
     try {
-      // Fetch 100% REAL public repositories of user 0xFE1C
+      // Fetch 100% REAL public repositories directly from github.com/0xFE1C
       const response = await fetch('https://api.github.com/users/0xFE1C/repos?sort=updated&per_page=100', {
         headers: {
           Accept: 'application/vnd.github.v3+json',
@@ -58,31 +70,38 @@ export const GithubReposSection: React.FC<GithubReposSectionProps> = ({ currentL
       });
 
       if (!response.ok) {
-        throw new Error(`GitHub API status: ${response.status}`);
+        if (response.status === 403) {
+          throw new Error('GitHub API rate limit tercapai. Silakan coba beberapa saat lagi.');
+        }
+        throw new Error(`GitHub API error: status ${response.status}`);
       }
 
       const data: GithubRepo[] = await response.json();
 
-      if (Array.isArray(data) && data.length > 0) {
+      if (Array.isArray(data)) {
         setRepos(data);
         setIsLive(true);
         try {
-          localStorage.setItem('0xfe1c_cached_real_repos', JSON.stringify(data));
+          localStorage.setItem('0xfe1c_live_github_repos_v2', JSON.stringify(data));
         } catch {
-          // Ignore storage quota
+          // Ignore
         }
       }
-    } catch {
-      // If error/rate limit, keep cached real repos if available
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Gagal menghubungi GitHub API';
+      setErrorMessage(msg);
+
+      // Keep only authentic cached data if previously saved, never show fake data
       try {
-        const cached = localStorage.getItem('0xfe1c_cached_real_repos');
+        const cached = localStorage.getItem('0xfe1c_live_github_repos_v2');
         if (cached) {
-          setRepos(JSON.parse(cached));
-        } else {
-          setRepos(fallbackRepos);
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setRepos(parsed);
+          }
         }
       } catch {
-        setRepos(fallbackRepos);
+        // Ignore
       }
       setIsLive(false);
     } finally {
@@ -92,7 +111,6 @@ export const GithubReposSection: React.FC<GithubReposSectionProps> = ({ currentL
   }, []);
 
   const handleRefresh = () => {
-    setLoading(true);
     spaceAudio.playBlip(720);
     fetchGithubRepos();
   };
@@ -101,7 +119,7 @@ export const GithubReposSection: React.FC<GithubReposSectionProps> = ({ currentL
     fetchGithubRepos();
   }, [fetchGithubRepos]);
 
-  // Extract unique languages for filter
+  // Extract unique languages actually present in repos
   const availableLanguages = useMemo(() => {
     const langs = new Set<string>();
     repos.forEach((r) => {
@@ -177,45 +195,65 @@ export const GithubReposSection: React.FC<GithubReposSectionProps> = ({ currentL
           </div>
 
           {/* LANGUAGE PILLS */}
-          <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-800/80">
-            <button
-              onClick={() => {
-                spaceAudio.playBlip(620);
-                setSelectedLanguage('all');
-              }}
-              className={`px-3 py-1 rounded-lg text-xs font-mono transition-colors ${
-                selectedLanguage === 'all'
-                  ? 'bg-cyan-950/70 border border-cyan-400 text-cyan-300'
-                  : 'bg-slate-900/60 border border-slate-800 text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              {t.projects.filterAll} ({repos.length})
-            </button>
-
-            {availableLanguages.map((lang) => (
+          {availableLanguages.length > 0 && (
+            <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-800/80">
               <button
-                key={lang}
                 onClick={() => {
-                  spaceAudio.playBlip(640);
-                  setSelectedLanguage(lang);
+                  spaceAudio.playBlip(620);
+                  setSelectedLanguage('all');
                 }}
-                className={`px-3 py-1 rounded-lg text-xs font-mono flex items-center space-x-1.5 transition-colors ${
-                  selectedLanguage === lang
-                    ? 'bg-purple-950/70 border border-purple-400 text-purple-200'
+                className={`px-3 py-1 rounded-lg text-xs font-mono transition-colors ${
+                  selectedLanguage === 'all'
+                    ? 'bg-cyan-950/70 border border-cyan-400 text-cyan-300'
                     : 'bg-slate-900/60 border border-slate-800 text-slate-400 hover:text-slate-200'
                 }`}
               >
-                <span
-                  className="w-2 h-2 rounded-full"
-                  style={{ backgroundColor: languageColors[lang] || '#8b5cf6' }}
-                />
-                <span>{lang}</span>
+                {t.projects.filterAll} ({repos.length})
               </button>
-            ))}
-          </div>
+
+              {availableLanguages.map((lang) => (
+                <button
+                  key={lang}
+                  onClick={() => {
+                    spaceAudio.playBlip(640);
+                    setSelectedLanguage(lang);
+                  }}
+                  className={`px-3 py-1 rounded-lg text-xs font-mono flex items-center space-x-1.5 transition-colors ${
+                    selectedLanguage === lang
+                      ? 'bg-purple-950/70 border border-purple-400 text-purple-200'
+                      : 'bg-slate-900/60 border border-slate-800 text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  <span
+                    className="w-2 h-2 rounded-full"
+                    style={{ backgroundColor: languageColors[lang] || '#8b5cf6' }}
+                  />
+                  <span>{lang}</span>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
-        {/* REPOSITORIES GRID - 100% REAL GITHUB REPOS & CLICKABLE CARDS */}
+        {/* RATE LIMIT OR ERROR BANNER IF ANY */}
+        {errorMessage && (
+          <div className="p-3.5 rounded-xl bg-amber-950/40 border border-amber-500/30 text-amber-300 text-xs font-mono flex items-center space-x-2">
+            <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
+            <span>{errorMessage}</span>
+          </div>
+        )}
+
+        {/* LOADING STATE */}
+        {loading && repos.length === 0 && (
+          <div className="text-center py-20 p-8 rounded-2xl cosmic-glass border border-cyan-500/30 space-y-4">
+            <RefreshCw className="w-8 h-8 text-cyan-400 animate-spin mx-auto" />
+            <div className="font-mono text-sm text-cyan-300">
+              Menghubungi satelit GitHub... Mengambil repositori realtime dari github.com/0xFE1C
+            </div>
+          </div>
+        )}
+
+        {/* REPOSITORIES GRID - 100% REAL GITHUB REPOSITORIES */}
         {filteredRepos.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredRepos.map((repo) => (
@@ -242,15 +280,21 @@ export const GithubReposSection: React.FC<GithubReposSectionProps> = ({ currentL
                     </div>
                   </div>
 
-                  {/* REAL REPO DESCRIPTION */}
-                  <p className="text-xs text-slate-300 line-clamp-3 leading-relaxed min-h-[3.75rem]">
-                    {repo.description || 'Public repository on github.com/0xFE1C'}
-                  </p>
+                  {/* REAL REPO DESCRIPTION (ONLY IF SET ON GITHUB) */}
+                  {repo.description && repo.description.trim() !== '' ? (
+                    <p className="text-xs text-slate-300 line-clamp-3 leading-relaxed min-h-[2.5rem]">
+                      {repo.description}
+                    </p>
+                  ) : (
+                    <p className="text-xs text-slate-500 italic font-mono min-h-[2.5rem]">
+                      {currentLang === 'id' ? '(Belum ada deskripsi di GitHub)' : '(No description provided on GitHub)'}
+                    </p>
+                  )}
 
-                  {/* REAL REPO TOPICS / TAGS */}
+                  {/* REAL REPO TOPICS / TAGS (ONLY IF SET ON GITHUB) */}
                   {repo.topics && repo.topics.length > 0 && (
                     <div className="flex flex-wrap gap-1">
-                      {repo.topics.slice(0, 4).map((topic, tIdx) => (
+                      {repo.topics.map((topic, tIdx) => (
                         <span
                           key={tIdx}
                           className="px-2 py-0.5 rounded bg-slate-900 border border-purple-500/20 text-[10px] font-mono text-purple-300"
@@ -265,7 +309,7 @@ export const GithubReposSection: React.FC<GithubReposSectionProps> = ({ currentL
                 {/* BOTTOM TELEMETRY BAR: REAL STARS, FORKS, LANGUAGE & LINK */}
                 <div className="pt-3 border-t border-slate-800/90 flex items-center justify-between text-xs font-mono text-slate-400">
                   <div className="flex items-center space-x-3">
-                    {/* Primary Language */}
+                    {/* Primary Language (ONLY IF DETECTED BY GITHUB) */}
                     {repo.language && (
                       <span className="flex items-center space-x-1.5">
                         <span
@@ -291,14 +335,20 @@ export const GithubReposSection: React.FC<GithubReposSectionProps> = ({ currentL
 
                   {/* Direct Link indicator */}
                   <span className="flex items-center space-x-1 text-cyan-400 group-hover:text-cyan-300 text-[11px] font-semibold">
-                    <span>{repo.homepage ? t.projects.liveDemo : t.projects.viewCode}</span>
+                    <span>
+                      {repo.homepage && repo.homepage.trim() !== ''
+                        ? t.projects.liveDemo
+                        : currentLang === 'id'
+                        ? 'Buka Repo'
+                        : 'Open Repo'}
+                    </span>
                     <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </span>
                 </div>
               </a>
             ))}
           </div>
-        ) : (
+        ) : !loading && (
           <div className="text-center py-16 p-8 rounded-2xl cosmic-glass border border-slate-800 text-slate-400 font-mono text-sm">
             {t.projects.noReposFound}
           </div>

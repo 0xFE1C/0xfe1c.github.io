@@ -175,40 +175,5 @@ export const certificationsData: CertificationItem[] = [
   },
 ];
 
-// Default real repositories of user 0xFE1C
-export const fallbackRepos: GithubRepo[] = [
-  {
-    id: 1422043259,
-    name: '0xfe1c.github.io',
-    full_name: '0xFE1C/0xfe1c.github.io',
-    description: '🌌 Deep space interactive portfolio website built with React, Vite & Tailwind CSS.',
-    html_url: 'https://github.com/0xFE1C/0xfe1c.github.io',
-    homepage: 'https://0xfe1c.github.io',
-    stargazers_count: 0,
-    forks_count: 0,
-    language: 'TypeScript',
-    topics: ['react', 'tailwindcss', 'portfolio', 'space-theme', 'black-hole'],
-    updated_at: new Date().toISOString(),
-    pushed_at: new Date().toISOString(),
-    created_at: new Date().toISOString(),
-    size: 2400,
-    fork: false,
-  },
-  {
-    id: 1422041285,
-    name: '0xFE1C',
-    full_name: '0xFE1C/0xFE1C',
-    description: '✨ Special GitHub profile repository containing cosmic telemetry, mission logs and verified credentials.',
-    html_url: 'https://github.com/0xFE1C/0xFE1C',
-    homepage: 'https://github.com/0xFE1C',
-    stargazers_count: 0,
-    forks_count: 0,
-    language: 'Markdown',
-    topics: ['github-profile', 'readme', '0xFE1C'],
-    updated_at: new Date().toISOString(),
-    pushed_at: new Date().toISOString(),
-    created_at: new Date().toISOString(),
-    size: 50,
-    fork: false,
-  },
-];
+// No hardcoded repositories - all repositories are fetched directly from live GitHub API
+export const fallbackRepos: GithubRepo[] = [];
