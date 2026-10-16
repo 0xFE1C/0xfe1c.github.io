@@ -2,7 +2,7 @@ import React from 'react';
 import { Briefcase, Code2, CheckCircle2, MapPin, Calendar, Layers, Users } from 'lucide-react';
 import { type Language } from '../types.ts';
 import { translations } from '../utils/translations.ts';
-import { experienceData } from '../data/portfolioData.ts';
+import { getExperienceData } from '../data/portfolioData.ts';
 import { spaceAudio } from '../utils/audio.ts';
 
 interface ExperienceSectionProps {
@@ -11,6 +11,7 @@ interface ExperienceSectionProps {
 
 export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ currentLang }) => {
   const t = translations[currentLang];
+  const experiences = getExperienceData(currentLang);
 
   return (
     <section id="experience" className="relative py-24 px-4 sm:px-6 lg:px-8 z-10">
@@ -28,7 +29,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ currentLan
 
         {/* MISSION LOGS TIMELINE CARDS */}
         <div className="space-y-8">
-          {experienceData.map((exp) => (
+          {experiences.map((exp) => (
             <div
               key={exp.id}
               onMouseEnter={() => spaceAudio.playBlip(640)}

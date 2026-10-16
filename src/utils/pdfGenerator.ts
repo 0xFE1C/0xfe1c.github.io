@@ -42,20 +42,20 @@ export function generateResumePDF(): void {
   const titleX = margin + 24;
   doc.setTextColor(255, 255, 255);
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(17);
-  doc.text('ADHIMAS PRAKOSO (FELIX)', titleX, 14);
+  doc.setFontSize(19);
+  doc.text('FELIX', titleX, 14.5);
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8);
+  doc.setFontSize(8.5);
   doc.setTextColor(196, 181, 253);
-  doc.text('Fullstack Software Engineer · Ketua Divisi Litbang HMTI · UI/UX Designer · 3D Artist', titleX, 19);
+  doc.text('Fullstack Software Engineer · Ketua Divisi Litbang HMTI · UI/UX Designer · 3D Artist', titleX, 19.5);
 
   // Quick Contact Pills Bar
   const contactPills = [
     { text: '0xFE1C@proton.me', icon: '@' },
     { text: '0xfe1c.github.io', icon: 'W' },
     { text: 'github.com/0xFE1C', icon: 'G' },
-    { text: 'Jakarta, ID (NIM: 17230448)', icon: 'L' },
+    { text: 'Jakarta, ID (July 2005)', icon: 'L' },
   ];
 
   let pillX = titleX;
@@ -122,7 +122,7 @@ export function generateResumePDF(): void {
   doc.setFontSize(6.8);
   doc.setTextColor(51, 65, 85);
   const summary =
-    'Adhimas Prakoso / Felix (0xFE1C, born July 2005, Jakarta) is a Multi-Disciplinary Software Engineer, Head of R&D (Ketua Divisi Litbang) at HMTI DPC Pemuda UBSI, and Digital Artist. Combines 3+ years of freelance experience delivering robust web, mobile, and desktop applications with low-level electrical engineering fundamentals (SMK TITL), Cisco-certified Python engineering, and spatial 3D computer graphics (Blender). Currently pursuing S1 Information Technology at Universitas Bina Sarana Informatika.';
+    'Felix (alias 0xFE1C, born July 2005, Jakarta) is a Multi-Disciplinary Software Engineer, Head of R&D (Ketua Divisi Litbang) at HMTI DPC Pemuda UBSI, and Digital Artist. Combines 3+ years of freelance experience delivering robust web, mobile, and desktop applications with low-level electrical engineering fundamentals (SMK TITL), Cisco-certified Python engineering, and spatial 3D computer graphics (Blender). Currently pursuing S1 Information Technology at Universitas Bina Sarana Informatika.';
   const splitSummary = doc.splitTextToSize(summary, contentWidth - 8);
   doc.text(splitSummary, margin + 4.5, currentY + 7.8);
 
@@ -485,36 +485,31 @@ export function generateResumePDF(): void {
       id: 'UBSI-FTI-TALENTA-2023',
       issuer: 'Fakultas Teknik & Informatika UBSI',
     },
-    {
-      title: 'TITL Electrical Power Installation',
-      id: 'TITL-DP1-2023-8812',
-      issuer: 'SMK Dinamika Pembangunan 1 (BNSP)',
-    },
   ];
 
   certList.forEach((c) => {
     doc.setFillColor(255, 255, 255);
     doc.setDrawColor(226, 232, 240);
     doc.setLineWidth(0.25);
-    doc.roundedRect(rightColX, rightY, rightColW, 11, 1.2, 1.2, 'FD');
+    doc.roundedRect(rightColX, rightY, rightColW, 12.5, 1.2, 1.2, 'FD');
 
     // Title
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(6.6);
+    doc.setFontSize(6.7);
     doc.setTextColor(15, 23, 42);
-    doc.text(c.title, rightColX + 3, rightY + 3.6);
+    doc.text(c.title, rightColX + 3, rightY + 3.8);
 
     // Subtitle & ID
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(5.7);
+    doc.setFontSize(5.8);
     doc.setTextColor(100, 116, 139);
-    doc.text(c.issuer, rightColX + 3, rightY + 7);
+    doc.text(c.issuer, rightColX + 3, rightY + 7.5);
 
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(124, 58, 237);
-    doc.text(c.id, rightColX + rightColW - 3, rightY + 7, { align: 'right' });
+    doc.text(c.id, rightColX + rightColW - 3, rightY + 7.5, { align: 'right' });
 
-    rightY += 12.8;
+    rightY += 15.2;
   });
 
   // ==========================================
@@ -562,7 +557,7 @@ export function generateResumePDF(): void {
   doc.roundedRect(rightColX, rightY, rightColW, 19, 1.5, 1.5, 'FD');
 
   const dossierLines = [
-    { label: 'Full Name:', val: 'Adhimas Prakoso (Felix)' },
+    { label: 'Alias / ID:', val: 'Felix (0xFE1C)' },
     { label: 'Origin:', val: 'Born July 2005 · Jakarta, ID' },
     { label: 'Organization:', val: 'Ketua Divisi Litbang HMTI (25/26)' },
     { label: 'Languages:', val: 'Indonesian (Native), English (Proficient)' },
@@ -603,5 +598,5 @@ export function generateResumePDF(): void {
   doc.text('https://0xfe1c.github.io', pageWidth - margin, footerY + 1.2, { align: 'right' });
 
   // Save PDF file
-  doc.save('Adhimas_Prakoso_0xFE1C_Portfolio_Resume.pdf');
+  doc.save('Felix_0xFE1C_Portfolio_Resume.pdf');
 }

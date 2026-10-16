@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Award, ShieldCheck, ExternalLink, Calendar, Hash, Download, FileText } from 'lucide-react';
 import { type CertificationItem, type Language } from '../types.ts';
 import { translations } from '../utils/translations.ts';
-import { certificationsData } from '../data/portfolioData.ts';
+import { getCertificationsData } from '../data/portfolioData.ts';
 import { CertificateModal } from './CertificateModal.tsx';
 import { spaceAudio } from '../utils/audio.ts';
 
@@ -13,6 +13,7 @@ interface CertificationsSectionProps {
 export const CertificationsSection: React.FC<CertificationsSectionProps> = ({ currentLang }) => {
   const [selectedCert, setSelectedCert] = useState<CertificationItem | null>(null);
   const t = translations[currentLang];
+  const certs = getCertificationsData(currentLang);
 
   return (
     <section id="certifications" className="relative py-24 px-4 sm:px-6 lg:px-8 z-10">
@@ -26,14 +27,11 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({ cu
           <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             {t.certifications.subtitle}
           </h2>
-          <p className="text-xs sm:text-sm font-mono text-slate-400 max-w-2xl mx-auto">
-            Official verified certifications, institutional credentials, and leadership appointment letters with downloadable original PDF documents.
-          </p>
         </div>
 
         {/* CERTIFICATION CARDS GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {certificationsData.map((cert) => {
+          {certs.map((cert) => {
             const hasPdf = Boolean(cert.pdfUrl);
             const previewImg = cert.previewImages?.[0];
 
@@ -79,7 +77,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({ cu
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent pointer-events-none" />
                       <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[10px] font-mono text-cyan-300 bg-slate-950/80 px-2 py-1 rounded backdrop-blur-sm border border-cyan-500/20">
-                        <span>Click to Inspect Full Preview</span>
+                        <span>{t.certifications.clickToInspect}</span>
                         <ExternalLink className="w-3 h-3 text-cyan-400" />
                       </div>
                     </div>
@@ -94,7 +92,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({ cu
                     </p>
                     {cert.recipientName && (
                       <p className="text-[11px] font-mono text-slate-400 mt-1">
-                        Holder: <span className="text-slate-200">{cert.recipientName}</span>
+                        {t.certifications.holderLabel}: <span className="text-slate-200">{cert.recipientName}</span>
                       </p>
                     )}
                   </div>
@@ -121,7 +119,7 @@ export const CertificationsSection: React.FC<CertificationsSectionProps> = ({ cu
                           spaceAudio.playLaser();
                         }}
                         className="p-1.5 rounded-lg bg-cyan-950/60 hover:bg-cyan-900 border border-cyan-500/40 text-cyan-300 hover:text-white transition-colors cursor-pointer"
-                        title="Download Certificate PDF"
+                        title={t.certifications.downloadPdf}
                       >
                         <Download className="w-3.5 h-3.5" />
                       </a>

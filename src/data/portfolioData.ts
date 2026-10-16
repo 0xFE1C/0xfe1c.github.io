@@ -1,4 +1,5 @@
-import { type EducationItem, type ExperienceItem, type CertificationItem, type SkillCategory, type GithubRepo } from '../types.ts';
+import { type EducationItem, type ExperienceItem, type CertificationItem, type SkillCategory, type GithubRepo, type Language } from '../types.ts';
+import { translations } from '../utils/translations.ts';
 
 export const educationData: EducationItem[] = [
   {
@@ -50,59 +51,72 @@ export const educationData: EducationItem[] = [
   },
 ];
 
-export const experienceData: ExperienceItem[] = [
-  {
-    id: 'freelance-dev',
-    role: 'Independent Software Engineer (Freelance)',
-    company: 'Self-Employed / Global Clients',
-    period: '2021 – Present (3+ Years)',
-    location: 'Jakarta, Indonesia (Remote)',
-    type: 'Freelance & Contract',
-    description: 'Delivered end-to-end custom software solutions for private clients, startups, and creative teams. Built cross-platform applications spanning Web, Mobile, Desktop, and Fullstack ecosystems with robust architectures.',
-    achievements: [
-      'Engineered cross-platform mobile and desktop apps tailored to bespoke business workflows and user experiences',
-      'Architected secure payment gateway transaction pipelines with automated webhooks, signature verification, and instant status synchronizations',
-      'Delivered end-to-end fullstack web applications with responsive glassmorphic UI, real-time database reactivity, and optimal Lighthouse performance',
-      'Provided ongoing technical maintenance, CI/CD pipeline automation, and zero-downtime cloud deployments',
-    ],
-    skills: ['React', 'TypeScript', 'Node.js', 'Payment Gateways', 'Mobile Apps', 'Desktop Dev', 'Tailwind CSS', 'REST APIs', 'PostgreSQL'],
-    icon: 'Code2',
-  },
-  {
-    id: 'hmti-litbang',
-    role: 'Ketua Divisi Litbang (Research & Development)',
-    company: 'HMTI DPC Pemuda · Universitas Bina Sarana Informatika',
-    period: '2025 – 2026',
-    location: 'Jakarta, Indonesia',
-    type: 'Organization Leadership',
-    description: 'Serving as Head of the Research & Development (Litbang) Division in the Information Technology Student Association (HMTI) at Universitas Bina Sarana Informatika. Directing student technical research initiatives, software development workshops, and organizational technology growth.',
-    achievements: [
-      'Spearheaded research and technology exploration programs for IT students on modern software development workflows, developer tooling, and emerging web tech',
-      'Orchestrated technical workshops, collaborative coding sessions, and digital competency acceleration initiatives across the academic community',
-      'Collaborated closely with executive board members (Dewan Pimpinan Cabang) on strategic planning, organizational governance, and cross-division alignment',
-      'Officially accredited through Organizational Decree & Certificate No: 05/SRT/17230448/DPC PEMUDA/HMTI/XI/2025',
-    ],
-    skills: ['Leadership', 'Technology R&D', 'Organizational Governance', 'Technical Mentorship', 'Event Coordination', 'Strategic Planning'],
-    icon: 'Users',
-  },
-  {
-    id: 'pt-indopintan',
-    role: 'Administrative Assistant (PKL / Internship)',
-    company: 'PT INDOPINTAN ADI PERKASA',
-    period: 'Vocational High School Internship',
-    location: 'Jakarta, Indonesia',
-    type: 'On-site Internship',
-    description: 'Served as an administrative and operations assistant during vocational high school, managing critical operational workflows spanning human resource calculations, warehouse logistics, and customer support.',
-    achievements: [
-      'Calculated monthly employee payroll records by analyzing and computing daily employee attendance logs, working days, and overtime hours',
-      'Supervised and organized physical warehouse inventory, categorizing stock items and updating internal inventory databases to minimize discrepancy',
-      'Handled rapid customer service communications on the Shopee e-commerce marketplace, answering product inquiries and resolving customer orders promptly',
-      'Demonstrated high adaptability, multitasking across administrative data entry, warehouse operations, and digital marketplace support',
-    ],
-    skills: ['Payroll Processing', 'Warehouse Management', 'Inventory Auditing', 'E-commerce (Shopee)', 'Data Entry', 'Customer Communication'],
-    icon: 'Briefcase',
-  },
-];
+export const getExperienceData = (lang: Language): ExperienceItem[] => {
+  const tExp = translations[lang].experience;
+  return [
+    {
+      id: 'freelance-dev',
+      role: tExp.freelanceTitle,
+      company: 'Self-Employed / Global Clients',
+      period: '2021 – Present (3+ Years)',
+      location: 'Jakarta, Indonesia (Remote)',
+      type: lang === 'id' ? 'Freelance & Kontrak' : 'Freelance & Contract',
+      description: tExp.freelanceDesc,
+      achievements: [
+        lang === 'id'
+          ? 'Merancang aplikasi mobile dan desktop lintas platform sesuai kebutuhan bisnis klien'
+          : 'Engineered cross-platform mobile and desktop apps tailored to bespoke business workflows and user experiences',
+        lang === 'id'
+          ? 'Membangun arsitektur payment gateway aman dengan webhook otomatis dan verifikasi tanda tangan digital'
+          : 'Architected secure payment gateway transaction pipelines with automated webhooks, signature verification, and instant status synchronizations',
+        lang === 'id'
+          ? 'Mengembangkan aplikasi web fullstack responsif dengan performa Lighthouse optimal'
+          : 'Delivered end-to-end fullstack web applications with responsive glassmorphic UI, real-time database reactivity, and optimal Lighthouse performance',
+        lang === 'id'
+          ? 'Menjalankan otomasi CI/CD dan deployment cloud tanpa downtime'
+          : 'Provided ongoing technical maintenance, CI/CD pipeline automation, and zero-downtime cloud deployments',
+      ],
+      skills: ['React', 'TypeScript', 'Node.js', 'Payment Gateways', 'Mobile Apps', 'Desktop Dev', 'Tailwind CSS', 'REST APIs', 'PostgreSQL'],
+      icon: 'Code2',
+    },
+    {
+      id: 'hmti-litbang',
+      role: tExp.hmtiTitle,
+      company: tExp.hmtiCompany,
+      period: '2025 – 2026',
+      location: 'Jakarta, Indonesia',
+      type: tExp.hmtiType,
+      description: tExp.hmtiDesc,
+      achievements: tExp.hmtiAchievements,
+      skills: ['Leadership', 'Technology R&D', 'Organizational Governance', 'Technical Mentorship', 'Event Coordination', 'Strategic Planning'],
+      icon: 'Users',
+    },
+    {
+      id: 'pt-indopintan',
+      role: tExp.internshipTitle,
+      company: 'PT INDOPINTAN ADI PERKASA',
+      period: lang === 'id' ? 'Magang PKL SMK' : 'Vocational High School Internship',
+      location: 'Jakarta, Indonesia',
+      type: lang === 'id' ? 'Magang On-site' : 'On-site Internship',
+      description: tExp.internshipDesc,
+      achievements: [
+        lang === 'id'
+          ? 'Menghitung rekap payroll bulanan karyawan melalui pengolahan data absensi dan jam lembur'
+          : 'Calculated monthly employee payroll records by analyzing and computing daily employee attendance logs, working days, and overtime hours',
+        lang === 'id'
+          ? 'Melakukan audit inventaris fisik gudang serta memutakhirkan pencatatan stok keluar-masuk'
+          : 'Supervised and organized physical warehouse inventory, categorizing stock items and updating internal inventory databases to minimize discrepancy',
+        lang === 'id'
+          ? 'Menangani layanan pelanggan dan resolusi pesanan dengan respon cepat di marketplace Shopee'
+          : 'Handled rapid customer service communications on the Shopee e-commerce marketplace, answering product inquiries and resolving customer orders promptly',
+      ],
+      skills: ['Payroll Processing', 'Warehouse Management', 'Inventory Auditing', 'E-commerce (Shopee)', 'Data Entry', 'Customer Communication'],
+      icon: 'Briefcase',
+    },
+  ];
+};
+
+export const experienceData: ExperienceItem[] = getExperienceData('en');
 
 export const skillCategories: SkillCategory[] = [
   {
@@ -149,86 +163,59 @@ export const skillCategories: SkillCategory[] = [
   },
 ];
 
-export const certificationsData: CertificationItem[] = [
-  {
-    id: 'cert-hmti-litbang',
-    title: 'Sertifikat Keterangan Organisasi - Ketua Divisi Litbang',
-    issuer: 'HMTI DPC Pemuda · Universitas Bina Sarana Informatika',
-    date: '01 Nov 2025 (Periode 2025/2026)',
-    credentialId: '05/SRT/17230448/DPC PEMUDA/HMTI/XI/2025',
-    category: 'organization',
-    recipientName: 'Adhimas Prakoso (NIM: 17230448)',
-    pdfUrl: './certificates/hmti-litbang-certificate.pdf',
-    downloadName: 'Sertifikat_HMTI_Litbang_Adhimas_Prakoso.pdf',
-    previewImages: [
-      './certificates/hmti-cert-page1.png',
-      './certificates/hmti-cert-page2.png',
-    ],
-    skills: ['Leadership', 'Research & Development (Litbang)', 'Organizational Governance', 'Technology Strategy'],
-    description: 'Surat keterangan dan sertifikat resmi Dewan Pimpinan Cabang Himpunan Mahasiswa Teknologi Informasi (HMTI) Fakultas Teknik dan Informatika Universitas Bina Sarana Informatika, menerangkan bahwa Adhimas Prakoso (NIM: 17230448) aktif menjabat sebagai Ketua Divisi Litbang Periode 2025/2026.',
-  },
-  {
-    id: 'cert-cisco-python',
-    title: 'PCAP: Programming Essentials in Python',
-    issuer: 'Cisco Networking Academy® & OpenEDG Python Institute',
-    date: '19 Jul 2024',
-    credentialId: 'CISCO-PCAP-2024-UBSI',
-    category: 'dev',
-    recipientName: 'Adimas Prakoso',
-    pdfUrl: './certificates/cisco-python-pcap-certificate.pdf',
-    downloadName: 'Cisco_Python_PCAP_Certificate_Adimas_Prakoso.pdf',
-    previewImages: ['./certificates/cisco-python-cert.png'],
-    skills: ['Python 3', 'OOP (Object-Oriented Programming)', 'Data Structures', 'Algorithms', 'Modules & Packages', 'Exception Handling'],
-    description: 'Official Statement of Achievement verifying proficiency in universal programming concepts, Python 3 language semantics, data structures, OOP principles, and real-world implementation mechanics at Universitas Bina Sarana Informatika.',
-  },
-  {
-    id: 'cert-ubsi-transformasi',
-    title: 'Akselerasi Transformasi Digital & Kompetensi Talenta Digital',
-    issuer: 'Fakultas Teknik & Informatika Universitas Bina Sarana Informatika',
-    date: '27 Nov 2023',
-    credentialId: 'UBSI-FTI-TALENTA-2023',
-    category: 'dev',
-    recipientName: 'Adimas Prakoso',
-    pdfUrl: './certificates/ubsi-digital-transformation-certificate.pdf',
-    downloadName: 'Sertifikat_Seminar_Transformasi_Digital_UBSI_Adimas_Prakoso.pdf',
-    previewImages: ['./certificates/ubsi-seminar-cert.png'],
-    skills: ['Digital Transformation', 'Digital Talent Ecosystems', 'Technology Strategy', 'Innovation'],
-    description: 'Sertifikat resmi keikutsertaan seminar Akselerasi Transformasi Digital & Peningkatan Kompetensi Talenta Digital bersama keynote speaker Ir. Hedi M. Idris, M.Sc, Ph.D di Aula Kampus UBSI Kramat 98.',
-  },
-  {
-    id: 'cert-titl',
-    title: 'Kompetensi Keahlian Teknik Instalasi Tenaga Listrik (TITL)',
-    issuer: 'SMK Dinamika Pembangunan 1 Jakarta & Standar BNSP',
-    date: '2023',
-    credentialId: 'TITL-DP1-2023-8812',
-    category: 'electrical',
-    recipientName: 'Adhimas Prakoso',
-    skills: ['Electrical Wiring', 'Three-Phase Systems', 'Relay Logic', 'Industrial Circuit Safety'],
-    description: 'Sertifikasi kompetensi kejuruan resmi yang memvalidasi penguasaan instalasi tenaga listrik tegangan rendah & menengah, pembacaan skema kelistrikan, serta standar keselamatan instalasi industri.',
-  },
-  {
-    id: 'cert-blender',
-    title: 'Blender 3D Spatial Graphics & Computer Animation',
-    issuer: 'Digital Media & Spatial Computer Graphics',
-    date: '2023',
-    credentialId: 'B3D-ANIM-7741',
-    category: '3d',
-    recipientName: '0xFE1C',
-    skills: ['Blender 3D', 'Keyframe Animation', 'PBR Shading', 'Cinematics'],
-    description: 'Validasi kemampuan tingkat lanjut dalam pemodelan 3D spasial, procedural texture generation, lighting design, dan animasi kamera interaktif.',
-  },
-  {
-    id: 'cert-payment',
-    title: 'Fintech Transaction Workflows & Payment Gateway Integration',
-    issuer: 'Software Architecture & Payment Systems',
-    date: '2023',
-    credentialId: 'PAY-ARCH-5542',
-    category: 'dev',
-    recipientName: '0xFE1C',
-    skills: ['Payment Gateways', 'Webhook Verification', 'Transaction Security', 'REST APIs'],
-    description: 'Kredensial arsitektur perangkat lunak yang memvalidasi keahlian praktis dalam merancang sistem payment gateway tangguh, signature verification, dan sinkronisasi status transaksi.',
-  },
-];
+export const getCertificationsData = (lang: Language): CertificationItem[] => {
+  const t = translations[lang].certifications.items;
+  return [
+    {
+      id: 'cert-hmti-litbang',
+      title: t.hmti.title,
+      issuer: t.hmti.issuer,
+      date: '01 Nov 2025 (2025/2026)',
+      credentialId: '05/SRT/17230448/DPC PEMUDA/HMTI/XI/2025',
+      category: 'organization',
+      recipientName: 'Felix (0xFE1C)',
+      pdfUrl: './certificates/hmti-litbang-certificate.pdf',
+      downloadName: 'Sertifikat_HMTI_Litbang_Felix.pdf',
+      previewImages: [
+        './certificates/hmti-cert-page1.png',
+        './certificates/hmti-cert-page2.png',
+      ],
+      skills: t.hmti.skills,
+      description: t.hmti.description,
+    },
+    {
+      id: 'cert-cisco-python',
+      title: t.cisco.title,
+      issuer: t.cisco.issuer,
+      date: '19 Jul 2024',
+      credentialId: 'CISCO-PCAP-2024-UBSI',
+      category: 'dev',
+      recipientName: 'Felix (0xFE1C)',
+      pdfUrl: './certificates/cisco-python-pcap-certificate.pdf',
+      downloadName: 'Cisco_Python_PCAP_Certificate_Felix.pdf',
+      previewImages: ['./certificates/cisco-python-cert.png'],
+      skills: t.cisco.skills,
+      description: t.cisco.description,
+    },
+    {
+      id: 'cert-ubsi-transformasi',
+      title: t.ubsi.title,
+      issuer: t.ubsi.issuer,
+      date: '27 Nov 2023',
+      credentialId: 'UBSI-FTI-TALENTA-2023',
+      category: 'dev',
+      recipientName: 'Felix (0xFE1C)',
+      pdfUrl: './certificates/ubsi-digital-transformation-certificate.pdf',
+      downloadName: 'Sertifikat_Seminar_Transformasi_Digital_UBSI_Felix.pdf',
+      previewImages: ['./certificates/ubsi-seminar-cert.png'],
+      skills: t.ubsi.skills,
+      description: t.ubsi.description,
+    },
+  ];
+};
+
+// Default export with only the 3 real authentic certificates (all fake 2023 certs removed)
+export const certificationsData: CertificationItem[] = getCertificationsData('en');
 
 // No hardcoded repositories - all repositories are fetched directly from live GitHub API
 export const fallbackRepos: GithubRepo[] = [];

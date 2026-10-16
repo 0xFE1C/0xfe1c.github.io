@@ -132,7 +132,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ currentLang }) => {
                 </div>
                 <div>
                   <div className="text-[10px] font-mono text-purple-300">ORGANIZATION LEADERSHIP</div>
-                  <div className="text-xs font-mono font-semibold text-slate-200">Ketua Divisi Litbang · HMTI DPC Pemuda (2025/2026)</div>
+                  <div className="text-xs font-mono font-semibold text-slate-200">{t.about.personalData.leadership || 'Head of R&D · HMTI DPC Pemuda (2025/2026)'}</div>
                 </div>
               </div>
             </div>

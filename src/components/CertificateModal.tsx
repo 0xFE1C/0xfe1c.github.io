@@ -37,7 +37,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ cert, onClos
         <button
           onClick={onClose}
           className="absolute top-4 right-4 p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-colors z-20 cursor-pointer"
-          title="Close transmission"
+          title={t.certifications.closeModal}
         >
           <X className="w-5 h-5" />
         </button>
@@ -55,7 +55,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ cert, onClos
               </span>
               {cert.pdfUrl && (
                 <span className="px-2 py-0.5 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-[10px] font-mono text-cyan-300">
-                  Official PDF Available
+                  {t.certifications.officialPdf}
                 </span>
               )}
             </div>
@@ -74,7 +74,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ cert, onClos
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center space-x-2 text-xs font-mono text-slate-300">
                 <FileText className="w-4 h-4 text-cyan-400" />
-                <span>DOCUMENT PREVIEW</span>
+                <span>{t.certifications.docPreview}</span>
               </div>
 
               {/* PAGE SWITCHER TABS FOR MULTI-PAGE DOCS */}
@@ -93,7 +93,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ cert, onClos
                           : 'text-slate-400 hover:text-white'
                       }`}
                     >
-                      Page {idx + 1}
+                      {t.certifications.page} {idx + 1}
                     </button>
                   ))}
                 </div>
@@ -117,7 +117,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ cert, onClos
             <div className="flex items-center justify-between py-1 border-b border-slate-800/80">
               <span className="text-slate-400 flex items-center space-x-1.5">
                 <User className="w-3.5 h-3.5 text-cyan-400" />
-                <span>Recipient Name</span>
+                <span>{t.certifications.holderLabel}</span>
               </span>
               <span className="text-white font-semibold">{cert.recipientName}</span>
             </div>
@@ -131,7 +131,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ cert, onClos
           <div className="flex items-center justify-between py-1 border-b border-slate-800/80">
             <span className="text-slate-400 flex items-center space-x-1.5">
               <Calendar className="w-3.5 h-3.5 text-purple-400" />
-              <span>Issue Date / Period</span>
+              <span>{t.certifications.issueDate}</span>
             </span>
             <span className="text-cyan-300">{cert.date}</span>
           </div>
@@ -139,7 +139,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ cert, onClos
           <div className="flex items-center justify-between py-1 border-b border-slate-800/80">
             <span className="text-slate-400 flex items-center space-x-1.5">
               <Hash className="w-3.5 h-3.5 text-amber-400" />
-              <span>Credential ID / Number</span>
+              <span>{t.certifications.credentialId}</span>
             </span>
             <span className="text-amber-300 font-mono select-all">{cert.credentialId}</span>
           </div>
@@ -153,7 +153,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ cert, onClos
         {/* VERIFIED SKILLS BADGES */}
         <div className="space-y-2">
           <span className="text-[11px] font-mono text-slate-400 block uppercase">
-            Validated Competencies:
+            {t.certifications.validatedCompetencies}
           </span>
           <div className="flex flex-wrap gap-1.5">
             {cert.skills.map((s, idx) => (
@@ -179,7 +179,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ cert, onClos
                 className="w-full sm:flex-1 py-3 px-4 rounded-xl font-mono text-xs font-bold text-black bg-gradient-to-r from-cyan-400 to-teal-400 hover:from-cyan-300 hover:to-teal-300 shadow-lg shadow-cyan-500/25 flex items-center justify-center space-x-2 transition-all cursor-pointer"
               >
                 <Download className="w-4 h-4" />
-                <span>Download Official Certificate (PDF)</span>
+                <span>{t.certifications.downloadPdf}</span>
               </a>
 
               <a
@@ -189,7 +189,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ cert, onClos
                 onClick={() => spaceAudio.playBlip(720)}
                 className="w-full sm:w-auto py-3 px-4 rounded-xl font-mono text-xs font-semibold text-slate-200 bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-cyan-400/50 flex items-center justify-center space-x-1.5 transition-all"
               >
-                <span>Open in Tab</span>
+                <span>{t.certifications.openInTab}</span>
                 <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />
               </a>
             </>
@@ -198,7 +198,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ cert, onClos
               onClick={onClose}
               className="w-full py-2.5 rounded-xl font-mono text-xs font-semibold text-white bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 shadow-md transition-all cursor-pointer"
             >
-              Close Transmission
+              {t.certifications.closeModal}
             </button>
           )}
         </div>

@@ -48,6 +48,7 @@ export const translations: Record<Language, {
       location: string;
       status: string;
       alias: string;
+      leadership: string;
     };
   };
   experience: {
@@ -55,6 +56,11 @@ export const translations: Record<Language, {
     subtitle: string;
     freelanceTitle: string;
     freelanceDesc: string;
+    hmtiTitle: string;
+    hmtiCompany: string;
+    hmtiType: string;
+    hmtiDesc: string;
+    hmtiAchievements: string[];
     internshipTitle: string;
     internshipDesc: string;
     highlights: string;
@@ -76,6 +82,37 @@ export const translations: Record<Language, {
     viewCredential: string;
     issuedBy: string;
     verified: string;
+    officialPdf: string;
+    clickToInspect: string;
+    downloadPdf: string;
+    openInTab: string;
+    holderLabel: string;
+    docPreview: string;
+    page: string;
+    issueDate: string;
+    credentialId: string;
+    validatedCompetencies: string;
+    closeModal: string;
+    items: {
+      hmti: {
+        title: string;
+        issuer: string;
+        description: string;
+        skills: string[];
+      };
+      cisco: {
+        title: string;
+        issuer: string;
+        description: string;
+        skills: string[];
+      };
+      ubsi: {
+        title: string;
+        issuer: string;
+        description: string;
+        skills: string[];
+      };
+    };
   };
   projects: {
     title: string;
@@ -157,6 +194,7 @@ export const translations: Record<Language, {
         location: 'Jakarta, Indonesia',
         status: 'Undergraduate IT Student & Freelance Engineer',
         alias: '0xFE1C / Felix',
+        leadership: 'Head of R&D · HMTI DPC Pemuda (2025/2026)',
       },
     },
     experience: {
@@ -164,6 +202,16 @@ export const translations: Record<Language, {
       subtitle: 'Documented milestones, freelance deployments, and organizational operations.',
       freelanceTitle: 'Independent Software Engineer (Freelance)',
       freelanceDesc: '3 years of end-to-end software development delivering custom web architectures, cross-platform mobile apps, desktop utilities, and fullstack systems with integrated payment gateways and real-time APIs.',
+      hmtiTitle: 'Head of Research & Development (R&D) Division',
+      hmtiCompany: 'HMTI DPC Pemuda · Universitas Bina Sarana Informatika',
+      hmtiType: 'Student Organization Leadership',
+      hmtiDesc: 'Serving as Head of the Research & Development (Litbang) Division in the Information Technology Student Association (HMTI DPC Pemuda) at Universitas Bina Sarana Informatika. Directing student technical research initiatives, software development workshops, and organizational technology growth.',
+      hmtiAchievements: [
+        'Spearheaded research and technology exploration programs for IT students on modern software development workflows, developer tooling, and emerging web tech',
+        'Orchestrated technical workshops, collaborative coding sessions, and digital competency acceleration initiatives across the academic community',
+        'Collaborated closely with executive board members (Dewan Pimpinan Cabang) on strategic planning, organizational governance, and cross-division alignment',
+        'Officially accredited through Organizational Decree & Certificate No: 05/SRT/17230448/DPC PEMUDA/HMTI/XI/2025',
+      ],
       internshipTitle: 'PT INDOPINTAN ADI PERKASA — Administrative Assistant',
       internshipDesc: 'Vocational internship (PKL) driving operations: computed employee payroll with attendance & overtime algorithms, categorized warehouse inventory, and managed high-volume buyer relations on Shopee.',
       highlights: 'Key Achievements & Deliverables',
@@ -185,6 +233,54 @@ export const translations: Record<Language, {
       viewCredential: 'View Details',
       issuedBy: 'Issued by',
       verified: 'Verified Credential',
+      officialPdf: 'Official PDF Available',
+      clickToInspect: 'Click to Inspect Full Preview',
+      downloadPdf: 'Download Official Certificate (PDF)',
+      openInTab: 'Open in Tab',
+      holderLabel: 'Holder',
+      docPreview: 'DOCUMENT PREVIEW',
+      page: 'Page',
+      issueDate: 'Issue Date / Period',
+      credentialId: 'Credential ID / Document No',
+      validatedCompetencies: 'Validated Competencies:',
+      closeModal: 'Close Transmission',
+      items: {
+        hmti: {
+          title: 'Official Organizational Appointment - Head of R&D Division',
+          issuer: 'HMTI DPC Pemuda · Universitas Bina Sarana Informatika',
+          description: 'Official appointment certificate and decree from the Information Technology Student Association (HMTI DPC Pemuda) at Universitas Bina Sarana Informatika, certifying Felix as active Head of the Research & Development Division for the 2025/2026 term.',
+          skills: [
+            'Leadership',
+            'Research & Development',
+            'Organizational Governance',
+            'Technology Strategy',
+          ],
+        },
+        cisco: {
+          title: 'PCAP: Programming Essentials in Python',
+          issuer: 'Cisco Networking Academy® & OpenEDG Python Institute',
+          description: 'Official Statement of Achievement verifying proficiency in fundamental computer programming, Python 3 language semantics, Object-Oriented Programming (OOP), algorithms, data structures, and practical troubleshooting at Universitas Bina Sarana Informatika.',
+          skills: [
+            'Python 3',
+            'OOP (Object-Oriented Programming)',
+            'Data Structures',
+            'Algorithms',
+            'Modules & Packages',
+            'Exception Handling',
+          ],
+        },
+        ubsi: {
+          title: 'Digital Transformation Acceleration & Digital Talent Competency',
+          issuer: 'Faculty of Engineering & Informatics · Universitas Bina Sarana Informatika',
+          description: 'Official certificate of active participation in the National Seminar on Digital Transformation Acceleration & Digital Talent Competency featuring keynote speaker Ir. Hedi M. Idris, M.Sc, Ph.D at Kampus UBSI Kramat 98.',
+          skills: [
+            'Digital Transformation',
+            'Digital Talent Ecosystems',
+            'Technology Strategy',
+            'Innovation',
+          ],
+        },
+      },
     },
     projects: {
       title: 'Realtime GitHub Feed',
@@ -266,6 +362,7 @@ export const translations: Record<Language, {
         location: 'Jakarta, Indonesia',
         status: 'Mahasiswa S1 TI & Freelance Developer',
         alias: '0xFE1C / Felix',
+        leadership: 'Ketua Divisi Litbang · HMTI DPC Pemuda (2025/2026)',
       },
     },
     experience: {
@@ -273,6 +370,16 @@ export const translations: Record<Language, {
       subtitle: 'Jejak rekam misi profesional, proyek lepas (freelance), dan operasional industri.',
       freelanceTitle: 'Software Engineer Lepas (Freelance)',
       freelanceDesc: '3 tahun menangani proyek pengembangan perangkat lunak secara mandiri: mulai dari web app responsif, aplikasi mobile, aplikasi desktop, hingga arsitektur sistem fullstack dengan integrasi payment gateway dan API realtime.',
+      hmtiTitle: 'Ketua Divisi Litbang (Penelitian & Pengembangan)',
+      hmtiCompany: 'HMTI DPC Pemuda · Universitas Bina Sarana Informatika',
+      hmtiType: 'Kepemimpinan Organisasi Mahasiswa',
+      hmtiDesc: 'Menjabat sebagai Ketua Divisi Penelitian dan Pengembangan (Litbang) pada Himpunan Mahasiswa Teknologi Informasi (HMTI DPC Pemuda) Universitas Bina Sarana Informatika. Memimpin inisiatif riset teknologi mahasiswa, lokakarya pengembangan software, dan tata kelola teknologi organisasi.',
+      hmtiAchievements: [
+        'Memimpin program riset dan eksplorasi teknologi untuk mahasiswa IT seputar alur kerja rekayasa perangkat lunak modern, developer tools, dan web tech terkini',
+        'Menyelenggarakan lokakarya teknis, sesi coding kolaboratif, dan inisiatif akselerasi kompetensi digital di lingkungan akademik kampus',
+        'Bekerja sama erat dengan Dewan Pimpinan Cabang dalam perencanaan strategis, tata kelola organisasi, dan penyelarasan divisi',
+        'Terakreditasi resmi melalui Surat Keputusan & Sertifikat Organisasi No: 05/SRT/17230448/DPC PEMUDA/HMTI/XI/2025',
+      ],
       internshipTitle: 'PT INDOPINTAN ADI PERKASA — Asisten Administratif',
       internshipDesc: 'Pengalaman magang/PKL SMK menangani: rekapitulasi gaji karyawan berdasarkan absensi & jam lembur, pendataan stok gudang, dan layanan pelanggan interaktif di toko online Shopee.',
       highlights: 'Pencapaian & Tanggung Jawab Utama',
@@ -294,6 +401,54 @@ export const translations: Record<Language, {
       viewCredential: 'Lihat Rincian',
       issuedBy: 'Diterbitkan oleh',
       verified: 'Sertifikat Terverifikasi',
+      officialPdf: 'PDF Resmi Tersedia',
+      clickToInspect: 'Klik untuk Lihat Pratinjau Lengkap',
+      downloadPdf: 'Unduh Sertifikat Resmi (PDF)',
+      openInTab: 'Buka di Tab Baru',
+      holderLabel: 'Pemegang',
+      docPreview: 'PRATINJAU DOKUMEN',
+      page: 'Halaman',
+      issueDate: 'Tanggal / Periode Terbit',
+      credentialId: 'ID Kredensial / Nomor Dokumen',
+      validatedCompetencies: 'Kompetensi Tervalidasi:',
+      closeModal: 'Tutup Transmisi',
+      items: {
+        hmti: {
+          title: 'Sertifikat Keterangan Organisasi - Ketua Divisi Litbang',
+          issuer: 'HMTI DPC Pemuda · Universitas Bina Sarana Informatika',
+          description: 'Surat keterangan dan sertifikat resmi Dewan Pimpinan Cabang Himpunan Mahasiswa Teknologi Informasi (HMTI DPC Pemuda) Universitas Bina Sarana Informatika, menerangkan bahwa Felix aktif menjabat sebagai Ketua Divisi Litbang Periode 2025/2026.',
+          skills: [
+            'Kepemimpinan',
+            'Riset & Pengembangan (Litbang)',
+            'Tata Kelola Organisasi',
+            'Strategi Teknologi',
+          ],
+        },
+        cisco: {
+          title: 'PCAP: Programming Essentials in Python',
+          issuer: 'Cisco Networking Academy® & OpenEDG Python Institute',
+          description: 'Pernyataan Pencapaian Resmi yang memverifikasi kemahiran dalam konsep pemrograman komputer fundamental, sintaksis & semantik bahasa Python 3, Object-Oriented Programming (OOP), algoritma, struktur data, dan pemecahan masalah praktis di Universitas Bina Sarana Informatika.',
+          skills: [
+            'Python 3',
+            'OOP (Pemrograman Berorientasi Objek)',
+            'Struktur Data',
+            'Algoritma',
+            'Modul & Paket',
+            'Penanganan Eksepsi',
+          ],
+        },
+        ubsi: {
+          title: 'Akselerasi Transformasi Digital & Kompetensi Talenta Digital',
+          issuer: 'Fakultas Teknik & Informatika · Universitas Bina Sarana Informatika',
+          description: 'Sertifikat resmi keikutsertaan aktif dalam Seminar Nasional Akselerasi Transformasi Digital & Peningkatan Kompetensi Talenta Digital bersama narasumber utama Ir. Hedi M. Idris, M.Sc, Ph.D di Kampus UBSI Kramat 98.',
+          skills: [
+            'Transformasi Digital',
+            'Ekosistem Talenta Digital',
+            'Strategi Teknologi',
+            'Inovasi IT',
+          ],
+        },
+      },
     },
     projects: {
       title: 'Repo GitHub Realtime',
@@ -375,6 +530,7 @@ export const translations: Record<Language, {
         location: 'ジャカルタ、インドネシア',
         status: '情報技術専攻大学生 ＆ フリーランス',
         alias: '0xFE1C / Felix',
+        leadership: '研究開発部門長 · HMTI DPC Pemuda (2025/2026)',
       },
     },
     experience: {
@@ -382,6 +538,16 @@ export const translations: Record<Language, {
       subtitle: 'フリーランス開発での実績と実務経験の記録。',
       freelanceTitle: 'フリーランス ソフトウェアエンジニア',
       freelanceDesc: '3年間にわたりWeb、モバイル、デスクトップ、フルスタックアプリを個人開発。決済ゲートウェイの統合やリアルタイムAPI連携など多数の実績を達成。',
+      hmtiTitle: '研究開発（R&D）部門長',
+      hmtiCompany: 'HMTI DPC Pemuda · ビナ・サラナ・インフォルマティカ大学',
+      hmtiType: '学生組織リーダーシップ',
+      hmtiDesc: 'ビナ・サラナ・インフォルマティカ大学情報技術学生協会（HMTI DPC Pemuda）の研究開発（R&D）部門長を務める。学生向けの技術研究イニシアチブ、ソフトウェア開発ワークショップ、組織の技術成長を主導。',
+      hmtiAchievements: [
+        '現代のソフトウェア開発ワークフロー、最新ツール、Web技術に関する研究・技術探求プログラムを主導',
+        '学内コミュニティでテクニカルワークショップ、共同コーディングセッション、デジタルスキル向上企画を統括',
+        '戦略的計画、組織ガバナンス、部門間連携について執行部（Dewan Pimpinan Cabang）と緊密に連携',
+        '公式任命証明書（No: 05/SRT/17230448/DPC PEMUDA/HMTI/XI/2025）により認定',
+      ],
       internshipTitle: 'PT INDOPINTAN ADI PERKASA — 事務アシスタント',
       internshipDesc: '工業高校在学時のインターンシップ。勤怠・残業データを集計した給与計算、倉庫の在庫管理、Shopeeでのカスタマーサポート業務を担当。',
       highlights: '主要実績と担当業務',
@@ -403,6 +569,54 @@ export const translations: Record<Language, {
       viewCredential: '詳細を見る',
       issuedBy: '発行元',
       verified: '認定済み',
+      officialPdf: '公式PDF利用可能',
+      clickToInspect: 'クリックして詳細プレビューを表示',
+      downloadPdf: '公式証明書（PDF）をダウンロード',
+      openInTab: '新しいタブで開く',
+      holderLabel: '保持者',
+      docPreview: 'ドキュメントプレビュー',
+      page: 'ページ',
+      issueDate: '発行日 / 期間',
+      credentialId: '証明書ID / 文書番号',
+      validatedCompetencies: '検証済みスキル:',
+      closeModal: '通信を閉じる',
+      items: {
+        hmti: {
+          title: '組織任用証明書 - 研究開発（R&D）部門長',
+          issuer: 'HMTI DPC Pemuda · ビナ・サラナ・インフォルマティカ大学',
+          description: 'ビナ・サラナ・インフォルマティカ大学情報技術学生協会（HMTI DPC Pemuda）発行の公式任用証明書。Felixが2025/2026期研究開発（R&D）部門長を務めることを証明。',
+          skills: [
+            'リーダーシップ',
+            '研究開発 (R&D)',
+            '組織ガバナンス',
+            '技術戦略',
+          ],
+        },
+        cisco: {
+          title: 'PCAP: Programming Essentials in Python',
+          issuer: 'Cisco Networking Academy® & OpenEDG Python Institute',
+          description: 'ビナ・サラナ・インフォルマティカ大学でのCisco Networking AcademyおよびOpenEDG Python Instituteによる認定。Python 3構文、オブジェクト指向プログラミング（OOP）、アルゴリズム、データ構造の実践的習熟を証明。',
+          skills: [
+            'Python 3',
+            'OOP (オブジェクト指向)',
+            'データ構造',
+            'アルゴリズム',
+            'モジュール & パッケージ',
+            '例外処理',
+          ],
+        },
+        ubsi: {
+          title: 'デジタルトランスフォーメーション加速とデジタル人材コンピテンシー',
+          issuer: '工学・情報学部 · ビナ・サラナ・インフォルマティカ大学',
+          description: 'UBSIクラマット98で開催された、Ir. Hedi M. Idris, M.Sc, Ph.Dを基調講演者に迎えた「デジタルトランスフォーメーション加速とデジタル人材コンピテンシー」全国セミナー参加認定証。',
+          skills: [
+            'デジタルトランスフォーメーション',
+            'デジタル人材エコシステム',
+            '技術戦略',
+            'イノベーション',
+          ],
+        },
+      },
     },
     projects: {
       title: 'リアルタイムGitHubリポジトリ',
@@ -484,6 +698,7 @@ export const translations: Record<Language, {
         location: '印尼 雅加达',
         status: '信息技术本科生 & 自由开发者',
         alias: '0xFE1C / Felix',
+        leadership: '研发部门主管 · HMTI DPC Pemuda (2025/2026)',
       },
     },
     experience: {
@@ -491,6 +706,16 @@ export const translations: Record<Language, {
       subtitle: '独立开发交付项目与企业实务经验。',
       freelanceTitle: '独立软件工程师 (自由职业)',
       freelanceDesc: '3年独立交付软件开发经验：涵盖Web应用、跨平台移动App、桌面软件及集成支付网关的全栈系统。',
+      hmtiTitle: '研发（R&D）部门主管',
+      hmtiCompany: 'HMTI DPC Pemuda · Bina Sarana Informatika 大学',
+      hmtiType: '学生组织领导职务',
+      hmtiDesc: '担任 Bina Sarana Informatika 大学信息技术学生会 (HMTI DPC Pemuda) 研发 (R&D) 部门主管。领导学生技术研究、软件开发研讨会及学生会技术生态建设。',
+      hmtiAchievements: [
+        '主导面向计算机系学生的现代软件开发流程、开发者工具与前沿Web技术的研发探索项目',
+        '在全校范围内组织技术工作坊、协作编程会议及数字化能力提升计划',
+        '与学生会主席团紧密协作，推进战略规划、组织治理与跨部门协同',
+        '经组织正式任命文件及证书认证（编号：05/SRT/17230448/DPC PEMUDA/HMTI/XI/2025）',
+      ],
       internshipTitle: 'PT INDOPINTAN ADI PERKASA — 行政助理',
       internshipDesc: '中专实习期间负责核算员工考勤与加班薪酬、仓库货物与库存盘点，并在Shopee电商平台提供客户支持。',
       highlights: '主要职责与交付成果',
@@ -512,6 +737,54 @@ export const translations: Record<Language, {
       viewCredential: '查看详情',
       issuedBy: '颁发机构',
       verified: '已认证',
+      officialPdf: '可下载官方 PDF',
+      clickToInspect: '点击查看完整预览',
+      downloadPdf: '下载官方证书 (PDF)',
+      openInTab: '在新标签页中打开',
+      holderLabel: '持有人',
+      docPreview: '文档预览',
+      page: '页',
+      issueDate: '签发日期 / 周期',
+      credentialId: '凭证 ID / 文件编号',
+      validatedCompetencies: '已验证核心能力：',
+      closeModal: '关闭窗口',
+      items: {
+        hmti: {
+          title: '组织任命证书 - 研发（R&D）部门主管',
+          issuer: 'HMTI DPC Pemuda · Bina Sarana Informatika 大学',
+          description: 'Bina Sarana Informatika 大学信息技术学生会 (HMTI DPC Pemuda) 官方任命证书，证明 Felix 担任 2025/2026 届研发（R&D）部门主管。',
+          skills: [
+            '组织领导力',
+            '技术研发 (R&D)',
+            '组织治理',
+            '技术战略',
+          ],
+        },
+        cisco: {
+          title: 'PCAP: Programming Essentials in Python',
+          issuer: '思科网络学院 (Cisco NetAcad) 与 OpenEDG Python 学院',
+          description: '在 Bina Sarana Informatika 大学完成的官方成就声明，验证在计算机编程基础、Python 3 语言语法、面向对象编程 (OOP)、算法与数据结构方面的熟练度。',
+          skills: [
+            'Python 3',
+            'OOP (面向对象编程)',
+            '数据结构',
+            '算法',
+            '模块与包',
+            '异常处理',
+          ],
+        },
+        ubsi: {
+          title: '数字化转型加速与数字人才竞争力研讨会',
+          issuer: '工程与信息技术学院 · Bina Sarana Informatika 大学',
+          description: '参加在 UBSI Kramat 98 举办的数字化转型加速与数字人才竞争力国家级研讨会的官方证书，主讲人为 Ir. Hedi M. Idris, M.Sc, Ph.D。',
+          skills: [
+            '数字化转型',
+            '数字人才生态',
+            '技术战略',
+            '创新架构',
+          ],
+        },
+      },
     },
     projects: {
       title: '实时 GitHub 项目库',
@@ -593,6 +866,7 @@ export const translations: Record<Language, {
         location: 'Yakarta, Indonesia',
         status: 'Estudiante Universitario de TI & Freelance',
         alias: '0xFE1C / Felix',
+        leadership: 'Jefe de I+D · HMTI DPC Pemuda (2025/2026)',
       },
     },
     experience: {
@@ -600,6 +874,16 @@ export const translations: Record<Language, {
       subtitle: 'Proyectos profesionales independientes y operaciones empresariales.',
       freelanceTitle: 'Ingeniero de Software Independiente (Freelance)',
       freelanceDesc: '3 años desarrollando arquitecturas web, aplicaciones móviles, software de escritorio y sistemas fullstack con pasarelas de pago y APIs en tiempo real.',
+      hmtiTitle: 'Jefe de la División de I+D (Investigación y Desarrollo)',
+      hmtiCompany: 'HMTI DPC Pemuda · Universidad Bina Sarana Informatika',
+      hmtiType: 'Liderazgo en Organización Estudiantil',
+      hmtiDesc: 'Jefe de la División de Investigación y Desarrollo (Litbang) en la Asociación de Estudiantes de TI (HMTI DPC Pemuda) en la Universidad Bina Sarana Informatika. Dirigiendo iniciativas de investigación técnica y talleres de software.',
+      hmtiAchievements: [
+        'Lideró programas de investigación técnica para estudiantes sobre flujos de trabajo de desarrollo modernos y herramientas web emergentes',
+        'Organizó talleres técnicos, sesiones de programación colaborativa e iniciativas de aceleración de competencias digitales en el campus',
+        'Colaboró estrechamente con la junta directiva en la planificación estratégica, gobernanza y alineación de divisiones',
+        'Acreditado oficialmente mediante decreto y certificado organizacional N° 05/SRT/17230448/DPC PEMUDA/HMTI/XI/2025',
+      ],
       internshipTitle: 'PT INDOPINTAN ADI PERKASA — Asistente Administrativo',
       internshipDesc: 'Pasantía técnica gestionando nóminas y horas extras de empleados, inventario de almacén y atención a compradores en la plataforma Shopee.',
       highlights: 'Responsabilidades y Logros',
@@ -621,6 +905,54 @@ export const translations: Record<Language, {
       viewCredential: 'Ver Detalles',
       issuedBy: 'Emitido por',
       verified: 'Verificado',
+      officialPdf: 'PDF Oficial Disponible',
+      clickToInspect: 'Haz clic para ver la vista previa completa',
+      downloadPdf: 'Descargar Certificado Oficial (PDF)',
+      openInTab: 'Abrir en nueva pestaña',
+      holderLabel: 'Titular',
+      docPreview: 'VISTA PREVIA DEL DOCUMENTO',
+      page: 'Página',
+      issueDate: 'Fecha / Período de emisión',
+      credentialId: 'ID de Credencial / N.º de Documento',
+      validatedCompetencies: 'Competencias Validadas:',
+      closeModal: 'Cerrar Transmisión',
+      items: {
+        hmti: {
+          title: 'Certificado de Nombramiento - Jefe de la División de I+D',
+          issuer: 'HMTI DPC Pemuda · Universidad Bina Sarana Informatika',
+          description: 'Certificado oficial de nombramiento de la Asociación de Estudiantes de TI (HMTI DPC Pemuda) en la Universidad Bina Sarana Informatika, que acredita a Felix como Jefe de la División de I+D (2025/2026).',
+          skills: [
+            'Liderazgo',
+            'Investigación y Desarrollo',
+            'Gobernanza Organizacional',
+            'Estrategia Tecnológica',
+          ],
+        },
+        cisco: {
+          title: 'PCAP: Programming Essentials in Python',
+          issuer: 'Cisco Networking Academy® & OpenEDG Python Institute',
+          description: 'Declaración oficial de logro que certifica el dominio de conceptos fundamentales de programación, sintaxis de Python 3, POO, algoritmos y estructuras de datos en la Universidad Bina Sarana Informatika.',
+          skills: [
+            'Python 3',
+            'POO (Programación Orientada a Objetos)',
+            'Estructuras de Datos',
+            'Algoritmos',
+            'Módulos y Paquetes',
+            'Manejo de Excepciones',
+          ],
+        },
+        ubsi: {
+          title: 'Aceleración de la Transformación Digital y Competencias del Talento Digital',
+          issuer: 'Facultad de Ingeniería e Informática · Universidad Bina Sarana Informatika',
+          description: 'Certificado oficial de participación activa en el Seminario Nacional sobre Aceleración de la Transformación Digital impartido por Ir. Hedi M. Idris, M.Sc, Ph.D en el Campus UBSI Kramat 98.',
+          skills: [
+            'Transformación Digital',
+            'Ecosistemas de Talento Digital',
+            'Estrategia Tecnológica',
+            'Innovación',
+          ],
+        },
+      },
     },
     projects: {
       title: 'Repositorios GitHub en Tiempo Real',
@@ -702,6 +1034,7 @@ export const translations: Record<Language, {
         location: 'Jakarta, Indonesien',
         status: 'IT-Student & Freiberuflicher Ingenieur',
         alias: '0xFE1C / Felix',
+        leadership: 'Leiter F&E · HMTI DPC Pemuda (2025/2026)',
       },
     },
     experience: {
@@ -709,6 +1042,16 @@ export const translations: Record<Language, {
       subtitle: 'Freiberufliche Softwareprojekte und betriebliche Erfahrungen.',
       freelanceTitle: 'Freiberuflicher Software-Ingenieur',
       freelanceDesc: '3 Jahre Entwicklung moderner Webanwendungen, Apps, Desktop-Software und Fullstack-Systeme mit Payment-Gateways und Echtzeit-APIs.',
+      hmtiTitle: 'Leiter der Abteilung für Forschung & Entwicklung (F&E)',
+      hmtiCompany: 'HMTI DPC Pemuda · Universitas Bina Sarana Informatika',
+      hmtiType: 'Studentische Organisationsleitung',
+      hmtiDesc: 'Leitung der Abteilung für Forschung & Entwicklung (Litbang) in der IT-Studentenvereinigung (HMTI DPC Pemuda) der Universitas Bina Sarana Informatika. Koordination studentischer Forschungsprojekte und Software-Entwicklungsworkshops.',
+      hmtiAchievements: [
+        'Leitung von Technologie-Explorationsprogrammen für IT-Studierende zu modernen Entwicklungsprozessen und Tooling',
+        'Organisation technischer Workshops, Coding-Sessions und Initiativen zur Beschleunigung digitaler Kompetenzen',
+        'Enge Zusammenarbeit mit dem Vorstand bei strategischer Planung und Organisations-Governance',
+        'Offiziell beglaubigt durch Organisationsurkunde Nr. 05/SRT/17230448/DPC PEMUDA/HMTI/XI/2025',
+      ],
       internshipTitle: 'PT INDOPINTAN ADI PERKASA — Verwaltungsassistent',
       internshipDesc: 'Betriebspraktikum während der Berufsschule: Gehaltsabrechnung nach Anwesenheit und Überstunden, Lagerbestandsverwaltung und Shopee-Kundenbetreuung.',
       highlights: 'Wichtige Aufgaben & Erfolge',
@@ -730,6 +1073,54 @@ export const translations: Record<Language, {
       viewCredential: 'Details ansehen',
       issuedBy: 'Ausgestellt von',
       verified: 'Verifiziert',
+      officialPdf: 'Offizielles PDF verfügbar',
+      clickToInspect: 'Klicken für vollständige Vorschau',
+      downloadPdf: 'Offizielles Zertifikat herunterladen (PDF)',
+      openInTab: 'In neuem Tab öffnen',
+      holderLabel: 'Inhaber',
+      docPreview: 'DOKUMENTENVORSCHAU',
+      page: 'Seite',
+      issueDate: 'Ausstellungsdatum / Zeitraum',
+      credentialId: 'Zertifikats-ID / Dokumentennr.',
+      validatedCompetencies: 'Validierte Kompetenzen:',
+      closeModal: 'Schließen',
+      items: {
+        hmti: {
+          title: 'Ernennungsurkunde - Leiter der F&E-Abteilung',
+          issuer: 'HMTI DPC Pemuda · Universitas Bina Sarana Informatika',
+          description: 'Offizielle Ernennungsurkunde der IT-Studentenvereinigung (HMTI DPC Pemuda) an der Universitas Bina Sarana Informatika für Felix als Leiter der F&E-Abteilung 2025/2026.',
+          skills: [
+            'Führungskompetenz',
+            'Forschung & Entwicklung',
+            'Organisations-Governance',
+            'Technologiestrategie',
+          ],
+        },
+        cisco: {
+          title: 'PCAP: Programming Essentials in Python',
+          issuer: 'Cisco Networking Academy® & OpenEDG Python Institute',
+          description: 'Offizielles Leistungszertifikat für grundlegende Programmierung, Python 3-Sprachsemantik, OOP, Algorithmen und Datenstrukturen an der Universitas Bina Sarana Informatika.',
+          skills: [
+            'Python 3',
+            'OOP (Objektorientierung)',
+            'Datenstrukturen',
+            'Algorithmen',
+            'Module & Pakete',
+            'Exception Handling',
+          ],
+        },
+        ubsi: {
+          title: 'Beschleunigung der digitalen Transformation & Talente',
+          issuer: 'Fakultät für Ingenieurwissenschaften & Informatik · Universitas Bina Sarana Informatika',
+          description: 'Offizielles Zertifikat über die Teilnahme am nationalen Seminar zur Beschleunigung der digitalen Transformation mit Keynote-Speaker Ir. Hedi M. Idris, M.Sc, Ph.D am Campus UBSI Kramat 98.',
+          skills: [
+            'Digitale Transformation',
+            'Ökosysteme digitaler Talente',
+            'Technologiestrategie',
+            'Innovation',
+          ],
+        },
+      },
     },
     projects: {
       title: 'Echtzeit GitHub Repositories',
@@ -811,6 +1202,7 @@ export const translations: Record<Language, {
         location: 'Jakarta, Indonésie',
         status: 'Étudiant en Licence TI & Développeur Indépendant',
         alias: '0xFE1C / Felix',
+        leadership: 'Chef de la R&D · HMTI DPC Pemuda (2025/2026)',
       },
     },
     experience: {
@@ -818,6 +1210,16 @@ export const translations: Record<Language, {
       subtitle: 'Réalisations en freelance et missions professionnelles.',
       freelanceTitle: 'Ingénieur Logiciel Indépendant (Freelance)',
       freelanceDesc: '3 ans de création d\'applications web complètes, mobiles et de bureau, avec intégration de passerelles de paiement et d\'APIs en temps réel.',
+      hmtiTitle: 'Chef de la Division Recherche & Développement (R&D)',
+      hmtiCompany: 'HMTI DPC Pemuda · Université Bina Sarana Informatika',
+      hmtiType: 'Leadership Étudiant & Gouvernance',
+      hmtiDesc: 'Chef de la division Recherche & Développement (Litbang) au sein de l\'Association des étudiants en informatique (HMTI DPC Pemuda) de l\'Université Bina Sarana Informatika. Direction des initiatives étudiantes de recherche technique, animation d\'ateliers de programmation et développement technologique de l\'organisation.',
+      hmtiAchievements: [
+        'Direction de programmes d\'exploration technologique pour les étudiants en informatique sur les méthodes de développement modernes et l\'outillage d\'ingénierie logicielle',
+        'Organisation d\'ateliers techniques, de sessions collaboratives de code et d\'initiatives d\'accélération des compétences numériques',
+        'Collaboration étroite avec le conseil d\'administration (Dewan Pimpinan Cabang) pour la planification stratégique et la gouvernance organisationnelle',
+        'Accrédité officiellement par le décret et certificat d\'organisation n° : 05/SRT/17230448/DPC PEMUDA/HMTI/XI/2025',
+      ],
       internshipTitle: 'PT INDOPINTAN ADI PERKASA — Assistant Administratif',
       internshipDesc: 'Stage professionnel : calcul des salaires et heures supplémentaires des employés, gestion des stocks et support client Shopee.',
       highlights: 'Missions et Réalisations Clés',
@@ -839,6 +1241,54 @@ export const translations: Record<Language, {
       viewCredential: 'Voir les détails',
       issuedBy: 'Délivré par',
       verified: 'Vérifié',
+      officialPdf: 'PDF Officiel Disponible',
+      clickToInspect: 'Cliquer pour afficher l\'aperçu complet',
+      downloadPdf: 'Télécharger le Certificat Officiel (PDF)',
+      openInTab: 'Ouvrir dans un nouvel onglet',
+      holderLabel: 'Titulaire',
+      docPreview: 'APERÇU DU DOCUMENT',
+      page: 'Page',
+      issueDate: 'Date / Période d\'émission',
+      credentialId: 'ID du Certificat / N° de Document',
+      validatedCompetencies: 'Compétences Validées :',
+      closeModal: 'Fermer la Transmission',
+      items: {
+        hmti: {
+          title: 'Certificat de Nomination - Chef de la Division R&D',
+          issuer: 'HMTI DPC Pemuda · Université Bina Sarana Informatika',
+          description: 'Certificat officiel de nomination de l\'Association des étudiants en informatique (HMTI DPC Pemuda) de l\'Université Bina Sarana Informatika, attestant de Felix en tant que Chef de la Division R&D pour 2025/2026.',
+          skills: [
+            'Leadership',
+            'Recherche & Développement',
+            'Gouvernance Organisationnelle',
+            'Stratégie Technologique',
+          ],
+        },
+        cisco: {
+          title: 'PCAP: Programming Essentials in Python',
+          issuer: 'Cisco Networking Academy® & OpenEDG Python Institute',
+          description: 'Attestation officielle de réussite certifiant la maîtrise de la programmation informatique fondamentale, de la syntaxe Python 3, de la POO, des algorithmes et des structures de données à l\'Université Bina Sarana Informatika.',
+          skills: [
+            'Python 3',
+            'POO (Programmation Orientée Objet)',
+            'Structures de Données',
+            'Algorithmes',
+            'Modules & Paquets',
+            'Gestion des Exceptions',
+          ],
+        },
+        ubsi: {
+          title: 'Accélération de la Transformation Numérique & Compétences',
+          issuer: 'Faculté d\'Ingénierie et d\'Informatique · Université Bina Sarana Informatika',
+          description: 'Certificat officiel de participation au Séminaire National sur l\'Accélération de la Transformation Numérique avec le conférencier d\'honneur Ir. Hedi M. Idris, M.Sc, Ph.D au campus UBSI Kramat 98.',
+          skills: [
+            'Transformation Numérique',
+            'Écosystèmes de Talents Numériques',
+            'Stratégie Technologique',
+            'Innovation',
+          ],
+        },
+      },
     },
     projects: {
       title: 'Dépôts GitHub en Temps Réel',
@@ -920,6 +1370,7 @@ export const translations: Record<Language, {
         location: '인도네시아 자카르타',
         status: '정보기술 학부생 & 프리랜서 개발자',
         alias: '0xFE1C / Felix',
+        leadership: 'R&D 부서장 · HMTI DPC Pemuda (2025/2026)',
       },
     },
     experience: {
@@ -927,6 +1378,16 @@ export const translations: Record<Language, {
       subtitle: '프리랜서 소프트웨어 구축과 기업 실무 경험입니다.',
       freelanceTitle: '독립 소프트웨어 엔지니어 (프리랜서)',
       freelanceDesc: '3년간 웹, 모바일, 데스크톱 소프트웨어 및 결제 게이트웨이와 실시간 API를 결합한 풀스택 애플리케이션을 성공적으로 개발 및 납품했습니다.',
+      hmtiTitle: '연구개발(R&D) 부서장',
+      hmtiCompany: 'HMTI DPC Pemuda · 비나 사라나 인포마티카 대학교',
+      hmtiType: '학생회 리더십',
+      hmtiDesc: '비나 사라나 인포마티카 대학교 정보기술 학생회(HMTI DPC Pemuda) 연구개발(Litbang) 부서장 역임. IT 학생 기술 연구 프로젝트 및 소프트웨어 개발 워크숍 총괄.',
+      hmtiAchievements: [
+        'IT 학생들을 위한 현대적 소프트웨어 개발 워크플로, 개발자 툴링 및 신기술 탐색 연구 프로그램 주도',
+        '교내 커뮤니티 전반의 테크 워크숍, 협업 코딩 세션 및 디지털 역량 강화 이니셔티브 총괄',
+        '전략 기획, 조직 거버넌스 및 부서 간 조율에 대해 학생회 집행부와 긴밀히 협력',
+        '조직 공식 임명장 및 수료증(No: 05/SRT/17230448/DPC PEMUDA/HMTI/XI/2025)을 통해 공인됨',
+      ],
       internshipTitle: 'PT INDOPINTAN ADI PERKASA — 행정 보조 (실습)',
       internshipDesc: '근태 및 연장 근무를 반영한 급여 정산, 물류 창고 재고 관리 및 Shopee 플랫폼 고객 응대를 수행했습니다.',
       highlights: '주요 역할 및 성과',
@@ -948,6 +1409,54 @@ export const translations: Record<Language, {
       viewCredential: '세부 정보',
       issuedBy: '발급 기관',
       verified: '인증 완료',
+      officialPdf: '공식 PDF 다운로드 가능',
+      clickToInspect: '클릭하여 전체 미리보기 확인',
+      downloadPdf: '공식 인증서 다운로드 (PDF)',
+      openInTab: '새 탭에서 열기',
+      holderLabel: '취득자',
+      docPreview: '문서 미리보기',
+      page: '페이지',
+      issueDate: '발급일 / 기간',
+      credentialId: '인증 ID / 문서 번호',
+      validatedCompetencies: '검증된 핵심 역량:',
+      closeModal: '전송 닫기',
+      items: {
+        hmti: {
+          title: '조직 임명 증명서 - 연구개발(R&D) 부서장',
+          issuer: 'HMTI DPC Pemuda · 비나 사라나 인포마티카 대학교',
+          description: '비나 사라나 인포마티카 대학교 정보기술 학생회(HMTI DPC Pemuda) 공식 임명장. Felix가 2025/2026 임기 연구개발(R&D) 부서장임을 증명.',
+          skills: [
+            '리더십',
+            '연구개발 (R&D)',
+            '조직 거버넌스',
+            '기술 전략',
+          ],
+        },
+        cisco: {
+          title: 'PCAP: Programming Essentials in Python',
+          issuer: 'Cisco Networking Academy® & OpenEDG Python Institute',
+          description: '비나 사라나 인포마티카 대학교에서 수료한 Cisco Networking Academy 및 OpenEDG Python Institute 공식 성취 증명서. Python 3 문법, 객체 지향 프로그래밍(OOP), 알고리즘 및 자료구조 역량 인증.',
+          skills: [
+            'Python 3',
+            'OOP (객체 지향 프로그래밍)',
+            '자료구조',
+            '알고리즘',
+            '모듈 & 패키지',
+            '예외 처리',
+          ],
+        },
+        ubsi: {
+          title: '디지털 전환 가속화 및 디지털 인재 역량 강화 세미나',
+          issuer: '공학 및 정보학부 · 비나 사라나 인포마티카 대학교',
+          description: 'UBSI Kramat 98 캠퍼스에서 열린 Ir. Hedi M. Idris, M.Sc, Ph.D 초청 디지털 전환 가속화 및 디지털 인재 역량 강화 세미나 공식 수료증.',
+          skills: [
+            '디지털 전환',
+            '디지털 인재 생태계',
+            '기술 전략',
+            'IT 혁신',
+          ],
+        },
+      },
     },
     projects: {
       title: '실시간 GitHub 저장소',
