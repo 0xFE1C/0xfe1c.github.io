@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #020108;
+    color: #f1f5f9;
+    font-family: var(--font-sans);
+  }
+
+  body {
+    overflow-x: hidden;
+    background-color: #020108;
+    selection-background-color: #8b5cf6;
+    selection-color: #ffffff;
+  }
+
+  ::selection {
+    background: rgba(139, 92, 246, 0.45);
+    color: #ffffff;
+  }
+
+  /* Custom Cosmic Scrollbar */
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #020108;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #7c3aed, #06b6d4);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #a855f7, #22d3ee);
+  }
+}
+
+/* Cosmic Glow & Glassmorphism Utilities */
+.cosmic-glass {
+  background: rgba(8, 12, 28, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.55), inset 0 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+.cosmic-glass-interactive {
+  background: rgba(10, 15, 36, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cosmic-glass-interactive:hover {
+  background: rgba(18, 24, 52, 0.75);
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 0 35px rgba(34, 211, 238, 0.22), inset 0 0 15px rgba(139, 92, 246, 0.15);
+  transform: translateY(-3px);
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Radial Vignette & Scanlines */
+.bg-radial-vignette {
+  background: radial-gradient(circle at center, transparent 45%, rgba(2, 1, 8, 0.88) 100%);
+}
+
+.bg-scanlines {
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+              linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  background-size: 100% 3px, 6px 100%;
+}
+
+/* Glowing text shadows */
+.glow-cyan {
+  text-shadow: 0 0 12px rgba(34, 211, 238, 0.65), 0 0 28px rgba(34, 211, 238, 0.35);
+}
+
+.glow-purple {
+  text-shadow: 0 0 12px rgba(168, 85, 247, 0.7), 0 0 30px rgba(168, 85, 247, 0.4);
+}
+
+.glow-amber {
+  text-shadow: 0 0 12px rgba(245, 158, 11, 0.7), 0 0 30px rgba(245, 158, 11, 0.4);
+}
+
+/* Animations */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+}
+
+.animate-float {
+  animation: float 7s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 24s linear infinite;
+}

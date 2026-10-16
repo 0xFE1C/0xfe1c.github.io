@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <radialGradient id="hole" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#000000" />
+      <stop offset="65%" stop-color="#0a0520" />
+      <stop offset="85%" stop-color="#7c3aed" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </radialGradient>
+    <linearGradient id="ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee" />
+      <stop offset="50%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="48" fill="#030014" />
+  <!-- Accretion disk -->
+  <ellipse cx="50" cy="50" rx="44" ry="16" stroke="url(#ring)" stroke-width="3" opacity="0.8" transform="rotate(-25 50 50)" />
+  <!-- Upper gravitational lens warp -->
+  <path d="M 12 50 C 12 25, 88 25, 88 50" stroke="url(#ring)" stroke-width="2" opacity="0.6" fill="none" />
+  <!-- Singularity core -->
+  <circle cx="50" cy="50" r="22" fill="#000000" stroke="#a855f7" stroke-width="2" />
+  <circle cx="50" cy="50" r="8" fill="#ffffff" opacity="0.3" filter="blur(2px)" />
+</svg>
