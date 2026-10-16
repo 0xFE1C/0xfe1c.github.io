@@ -3,6 +3,8 @@ name: Deploy Orbit Portfolio to GitHub Pages
 on:
   push:
     branches: [main, master]
+  schedule:
+    - cron: '0 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -32,6 +34,12 @@ jobs:
 
       - name: Install Dependencies
         run: npm ci
+
+      - name: Sync Realtime GitHub Repos at Build
+        run: |
+          curl -s -H "Accept: application/vnd.github.v3+json" \
+                  -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                  https://api.github.com/users/0xFE1C/repos?sort=updated > public/repos-cache.json || true
 
       - name: Build Production Bundle
         run: npm run build

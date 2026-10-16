@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { Star, GitFork, RefreshCw, Search, ExternalLink, Code2, Clock, AlertCircle } from 'lucide-react';
+import { Star, GitFork, RefreshCw, Search, ExternalLink, Code2, Clock } from 'lucide-react';
 import { type GithubRepo, type Language } from '../types.ts';
 import { translations } from '../utils/translations.ts';
 import { spaceAudio } from '../utils/audio.ts';
@@ -26,18 +26,9 @@ const languageColors: Record<string, string> = {
 };
 
 export const GithubReposSection: React.FC<GithubReposSectionProps> = ({ currentLang }) => {
-  // Clear any legacy mock cache from previous sessions
-  useEffect(() => {
-    try {
-      localStorage.removeItem('0xfe1c_cached_real_repos');
-    } catch {
-      // Ignore
-    }
-  }, []);
-
   const [repos, setRepos] = useState<GithubRepo[]>(() => {
     try {
-      const cached = localStorage.getItem('0xfe1c_live_github_repos_v2');
+      const cached = localStorage.getItem('0xfe1c_live_github_repos_v3');
       if (cached) {
         const parsed = JSON.parse(cached);
         if (Array.isArray(parsed) && parsed.length > 0) return parsed;
@@ -49,7 +40,6 @@ export const GithubReposSection: React.FC<GithubReposSectionProps> = ({ currentL
   });
 
   const [loading, setLoading] = useState<boolean>(true);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedLanguage, setSelectedLanguage] = useState<string>('all');
   const [lastSynced, setLastSynced] = useState<string | null>(null);
@@ -59,45 +49,57 @@ export const GithubReposSection: React.FC<GithubReposSectionProps> = ({ currentL
 
   const fetchGithubRepos = useCallback(async () => {
     setLoading(true);
-    setErrorMessage(null);
 
     try {
-      // Fetch 100% REAL public repositories directly from github.com/0xFE1C
+      // 1. Attempt LIVE query to official GitHub REST API
       const response = await fetch('https://api.github.com/users/0xFE1C/repos?sort=updated&per_page=100', {
         headers: {
           Accept: 'application/vnd.github.v3+json',
         },
       });
 
-      if (!response.ok) {
-        if (response.status === 403) {
-          throw new Error('GitHub API rate limit tercapai. Silakan coba beberapa saat lagi.');
-        }
-        throw new Error(`GitHub API error: status ${response.status}`);
-      }
-
-      const data: GithubRepo[] = await response.json();
-
-      if (Array.isArray(data)) {
-        setRepos(data);
-        setIsLive(true);
-        try {
-          localStorage.setItem('0xfe1c_live_github_repos_v2', JSON.stringify(data));
-        } catch {
-          // Ignore
+      if (response.ok) {
+        const data: GithubRepo[] = await response.json();
+        if (Array.isArray(data) && data.length > 0) {
+          setRepos(data);
+          setIsLive(true);
+          try {
+            localStorage.setItem('0xfe1c_live_github_repos_v3', JSON.stringify(data));
+          } catch {
+            // Ignore quota
+          }
+          setLastSynced(new Date().toLocaleTimeString());
+          setLoading(false);
+          return;
         }
       }
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Gagal menghubungi GitHub API';
-      setErrorMessage(msg);
 
-      // Keep only authentic cached data if previously saved, never show fake data
+      // 2. If rate-limited (HTTP 403) or error, load real pre-synced repo cache
+      const cacheResponse = await fetch('./repos-cache.json');
+      if (cacheResponse.ok) {
+        const cacheData: GithubRepo[] = await cacheResponse.json();
+        if (Array.isArray(cacheData) && cacheData.length > 0) {
+          setRepos(cacheData);
+          setIsLive(false);
+          setLastSynced(new Date().toLocaleTimeString());
+          setLoading(false);
+          return;
+        }
+      }
+    } catch {
+      // 3. Fallback to localStorage or static cache
       try {
-        const cached = localStorage.getItem('0xfe1c_live_github_repos_v2');
+        const cached = localStorage.getItem('0xfe1c_live_github_repos_v3');
         if (cached) {
           const parsed = JSON.parse(cached);
           if (Array.isArray(parsed) && parsed.length > 0) {
             setRepos(parsed);
+          }
+        } else {
+          const cacheRes = await fetch('./repos-cache.json');
+          if (cacheRes.ok) {
+            const cacheData: GithubRepo[] = await cacheRes.json();
+            if (Array.isArray(cacheData)) setRepos(cacheData);
           }
         }
       } catch {
@@ -116,10 +118,22 @@ export const GithubReposSection: React.FC<GithubReposSectionProps> = ({ currentL
   };
 
   useEffect(() => {
-    fetchGithubRepos();
-  }, [fetchGithubRepos]);
+    // Initial fetch from cache immediately if state is empty
+    if (repos.length === 0) {
+      fetch('./repos-cache.json')
+        .then((r) => r.json())
+        .then((d) => {
+          if (Array.isArray(d) && d.length > 0) {
+            setRepos(d);
+          }
+        })
+        .catch(() => {});
+    }
 
-  // Extract unique languages actually present in repos
+    fetchGithubRepos();
+  }, [fetchGithubRepos, repos.length]);
+
+  // Extract unique languages actually present in real repos
   const availableLanguages = useMemo(() => {
     const langs = new Set<string>();
     repos.forEach((r) => {
@@ -179,7 +193,7 @@ export const GithubReposSection: React.FC<GithubReposSectionProps> = ({ currentL
               <div className="text-[11px] font-mono text-slate-400 flex items-center space-x-1.5">
                 <Clock className="w-3.5 h-3.5 text-purple-400" />
                 <span>
-                  {isLive ? 'Live GitHub Sync' : 'Synced'} {lastSynced && `· ${lastSynced}`}
+                  {isLive ? 'Live API Connected' : 'Auto Synced'} {lastSynced && `· ${lastSynced}`}
                 </span>
               </div>
 
@@ -235,17 +249,9 @@ export const GithubReposSection: React.FC<GithubReposSectionProps> = ({ currentL
           )}
         </div>
 
-        {/* RATE LIMIT OR ERROR BANNER IF ANY */}
-        {errorMessage && (
-          <div className="p-3.5 rounded-xl bg-amber-950/40 border border-amber-500/30 text-amber-300 text-xs font-mono flex items-center space-x-2">
-            <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
-            <span>{errorMessage}</span>
-          </div>
-        )}
-
-        {/* LOADING STATE */}
+        {/* LOADING INDICATOR WHILE WAITING */}
         {loading && repos.length === 0 && (
-          <div className="text-center py-20 p-8 rounded-2xl cosmic-glass border border-cyan-500/30 space-y-4">
+          <div className="text-center py-16 p-8 rounded-2xl cosmic-glass border border-cyan-500/30 space-y-4">
             <RefreshCw className="w-8 h-8 text-cyan-400 animate-spin mx-auto" />
             <div className="font-mono text-sm text-cyan-300">
               Menghubungi satelit GitHub... Mengambil repositori realtime dari github.com/0xFE1C
